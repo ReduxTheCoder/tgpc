@@ -1,11 +1,37 @@
 # include <stdio.h>
 # include <string.h>
+# include "../include/file_utils.h"
 # include "../include/enums.h"
+# include "../include/struct.h"
 
-typedef struct {
-    char * ProjectName;
-    char * ProjectLang;
-} ProgramConfig;
+# define PROGRAM_VER 0.2
+
+/*
+ * This function converts the programming language string into an enum
+ * from ../include/enums.h
+ *
+ * lang - the programming language string given by the user
+ * returns the ProgrammingLanguage enum
+*/
+ProgrammingLanguage get_language_enum(const char * lang) {
+    if (strcmp(lang, "c") == 0) {
+        return C;
+    }
+    if (strcmp(lang, "cpp") == 0) {
+        return CPP;
+    }
+    if (strcmp(lang, "py") == 0) {
+        return PYTHON;
+    }
+    if (strcmp(lang, "java") == 0) {
+        return JAVA;
+    }
+    if (strcmp(lang, "rs") == 0) {
+        return RUST;
+    }
+
+    return INVALID;
+}
 
 /*
  * This function builds the ProgramConfig given a pointer of one
@@ -16,18 +42,18 @@ typedef struct {
  * returns an exit code
 */
 int build_program_config(int argc, char ** argv, ProgramConfig * config) {
-    if (argc < 3) {
+    if (argc < 4) {
         return NOT_ENOUGH_ARGS;
     }
 
-    config->ProjectName = argv[1];
-    config->ProjectLang = argv[2];
+    config->ProjectName = argv[2];
+    config->ProjectLang = get_language_enum(argv[3]);
 
     return SUCCESS;
 }
 
 void display_help_message() {
-    printf("TGPC - The Greatest Project Creator (v0.1)\n");
+    printf("TGPC - The Greatest Project Creator (%f)\n", PROGRAM_VER);
     printf("A C CLI tool to quickly scaffold code projects using templates.\n\n");
 
     printf("Usage:\n");
@@ -45,14 +71,21 @@ void display_help_message() {
 int main(int argc, char ** argv) {
     ProgramConfig config;
 
-    int exit_code = build_program_config(argc, argv, &config);
+    if (strcmp("new", argv[1]) == 0 || strcmp("n", argv[1]) == 0) {
+        int exit_code = build_program_config(argc, argv, &config);
 
-    switch (exit_code) {
-        case SUCCESS:
-            break;
-        case NOT_ENOUGH_ARGS:
-            display_help_message();
-            return exit_code;
+        switch (exit_code) {
+            case SUCCESS:
+                create_project(&config);
+                break;
+            case NOT_ENOUGH_ARGS:
+                display_help_message();
+                return exit_code;
+        }
+    }
+    else if (strcmp("help", argv[1]) == 0 || strcmp("h", argv[1]) == 0) {
+        display_help_message();
+        return 1;
     }
 
     return SUCCESS;
