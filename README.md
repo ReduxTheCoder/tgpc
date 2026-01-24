@@ -7,6 +7,14 @@ TGPC is a C command-line tool to quickly scaffold code projects using templates.
 - Quickly create projects
 - Compile/Run them
 
+## Project Status
+TGPC currently lacks lots of his barebones features, as it's still in development:
+- Windows support
+- Commands
+- Additional language support
+
+New features will be added in future releases
+
 ## Installation
 First clone the repository and then build using the makefile:
 ```bash
@@ -19,6 +27,8 @@ Optionally you can remove the cloned repository:
 cd ..
 rm -r tgpc
 ```
+
+You can directly download the binary from our releases, and move it in your PATH variable
 
 ## Quick start
 to display a help message that shows all commands:
