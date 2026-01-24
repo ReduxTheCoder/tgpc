@@ -4,3 +4,7 @@ make: src/main.c
 run: src/main.c
 	make
 	./bin/tgpc
+
+build: src/main.c
+	make
+	mv ./bin/tgpc ~/.local/bin/tgpc
