@@ -1,4 +1,5 @@
 # include <stdio.h>
+# include <string.h>
 # include "../include/enums.h"
 
 typedef struct {
@@ -25,10 +26,24 @@ int build_program_config(int argc, char ** argv, ProgramConfig * config) {
     return SUCCESS;
 }
 
+void display_help_message() {
+    printf("TGPC - The Greatest Project Creator (v0.1)\n");
+    printf("A C CLI tool to quickly scaffold code projects using templates.\n\n");
+
+    printf("Usage:\n");
+    printf("  tgpc [COMMAND] [ARGS]\n\n");
+
+    printf("Commands:\n");
+    printf("  new, n <NAME> <LANG>   Create a new project with a given name and programming language\n");
+    printf("  help, h                Display this help message\n\n");
+
+    printf("Examples:\n");
+    printf("  tgpc new my-project py\n");
+    printf("  tgpc help\n");
+}
+
 int main(int argc, char ** argv) {
     ProgramConfig config;
-
-    printf("%s\n%s\n", config.ProjectName, config.ProjectLang);
 
     int exit_code = build_program_config(argc, argv, &config);
 
@@ -36,11 +51,9 @@ int main(int argc, char ** argv) {
         case SUCCESS:
             break;
         case NOT_ENOUGH_ARGS:
-            printf("Not enough arguments\n");
+            display_help_message();
             return exit_code;
     }
 
-    printf("%s\n%s\n", config.ProjectName, config.ProjectLang);
-
-    return 1;
+    return SUCCESS;
 }
