@@ -1,6 +1,9 @@
 # ifndef FILE_UTILS_H
 # define FILE_UTILS_H
 
-int build_project_path();
+# include "struct.h"
+
+char * build_project_path(const char * project_name);
+void create_project(const ProgramConfig * config);
 
 # endif
