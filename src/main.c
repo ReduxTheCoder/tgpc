@@ -77,8 +77,7 @@ int main(int argc, char ** argv) {
 
         switch (exit_code) {
             case SUCCESS:
-                create_project(&config);
-                break;
+                return create_project(&config);
             case NOT_ENOUGH_ARGS:
                 display_help_message();
                 return exit_code;
@@ -86,7 +85,6 @@ int main(int argc, char ** argv) {
     }
     else if (strcmp("help", argv[1]) == 0 || strcmp("h", argv[1]) == 0) {
         display_help_message();
-        return 1;
     }
 
     return SUCCESS;
