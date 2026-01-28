@@ -1,5 +1,5 @@
 make: src/main.c
-	gcc -Wall -Wextra -Wall -g -pedantic src/main.c src/file_utils.c src/utils.c -o bin/tgpc
+	gcc -Wall -Wextra -Wall -g -pedantic src/main.c src/file_utils.c src/utils.c src/logging.c -o bin/tgpc
 
 run: src/main.c
 	make
