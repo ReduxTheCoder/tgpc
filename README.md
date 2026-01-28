@@ -28,7 +28,7 @@ cd ..
 rm -r tgpc
 ```
 
-You can directly download the binary from our releases, and move it in your PATH variable
+You can also directly download the binary from our releases, and move it in your PATH variable
 
 ## Quick start
 to display a help message that shows all commands:
