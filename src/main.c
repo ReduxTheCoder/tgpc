@@ -3,8 +3,9 @@
 # include "../include/file_utils.h"
 # include "../include/enums.h"
 # include "../include/struct.h"
+# include "../include/utils.h"
 
-# define PROGRAM_VER 0.3
+# define PROGRAM_VER 1.0.0
 
 /*
  * This function converts the programming language string into an enum
@@ -13,25 +14,6 @@
  * lang - the programming language string given by the user
  * returns the ProgrammingLanguage enum
 */
-ProgrammingLanguage get_language_enum(const char * lang) {
-    if (strcmp(lang, "c") == 0) {
-        return C;
-    }
-    if (strcmp(lang, "cpp") == 0) {
-        return CPP;
-    }
-    if (strcmp(lang, "py") == 0) {
-        return PYTHON;
-    }
-    if (strcmp(lang, "java") == 0) {
-        return JAVA;
-    }
-    if (strcmp(lang, "rs") == 0) {
-        return RUST;
-    }
-
-    return INVALID;
-}
 
 /*
  * This function builds the ProgramConfig given a pointer of one
@@ -85,6 +67,9 @@ int main(int argc, char ** argv) {
     }
     else if (strcmp("help", argv[1]) == 0 || strcmp("h", argv[1]) == 0) {
         display_help_message();
+    }
+    else if (strcmp("run", argv[1]) == 0 || strcmp("r", argv[1]) == 0) {
+        return run_project();
     }
 
     return SUCCESS;
