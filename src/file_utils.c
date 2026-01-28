@@ -5,6 +5,7 @@
 # include <string.h>
 # include <sys/stat.h>
 # include "../include/struct.h"
+# include "../include/logging.h"
 # include "../include/utils.h"
 
 typedef char * path;
@@ -26,25 +27,38 @@ static char * get_template_by_lang(const ProgrammingLanguage lang) {
             return "print(\"Hello, World!\")";
             break;
         case C:
-            return "# include <stdio.h>\n\nint main(const int argc, const char ** argv) {\n\tprintf(\"Hello, World\");\n\treturn 0;\n}";
+            return "# include <stdio.h>\n\nint main(const int argc, const char ** argv) {\n\tprintf(\"Hello, World\\n\");\n\treturn 0;\n}";
             break;
         case CPP:
             return "# include <iostream>\n\nint main(const int argc, const char ** argv) {\n\tstd::cout << \"Hello, World!\\n\";\n\treturn 0;\n}";
             break;
         case RUST:
-            return "fn main() {\n\tprintln!(\"Hello, World!\")\n}";
+            return "fn main() {\n\tprintln!(\"Hello, World!\");\n}";
             break;
         case JAVA:
-            return "public class HelloWorld {\\n    public static void main(String[] args) {\\n        System.out.println(\\\"Hello, World!\\\");\\n    }\\n}";
+            return "public class main {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println(\"Hello, World!\");\n\t}\n}";
             break;
-        default:
-            printf("Warning: Language not recognized, this will make an empty template file");
-            return "";
-            break;
+        default: {
+            char input[64];
+            plog("Language not recognized, this will make an empty template file\nAre you sure of this?\n", LOG_WARN);
+            printf("(y/n) ");
+
+            if (fgets(input, sizeof(input), stdin) != NULL && strcmp(input, "y\n") == 0) {
+                return "";
+            } else {
+                return NULL;
+            }
+        }
     }
 }
 
-void create_project(const ProgramConfig * config) {
+int create_project(const ProgramConfig * config) {
+    char * template_str = get_template_by_lang(config->ProjectLang);
+
+    if (template_str == NULL) {
+        return DENY;
+    }
+
     path project_parent = build_project_path(config->ProjectName);
     mkdir(project_parent, 0777);
 
@@ -59,7 +73,7 @@ void create_project(const ProgramConfig * config) {
     FILE * main = fopen(main_name, "a");
     free(main_name);
 
-    char * template_str = get_template_by_lang(config->ProjectLang);
-
     fprintf(main, "%s\n", template_str);
+
+    return SUCCESS;
 }

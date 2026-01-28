@@ -4,6 +4,6 @@
 # include "struct.h"
 
 char * build_project_path(const char * project_name);
-void create_project(const ProgramConfig * config);
+int create_project(const ProgramConfig * config);
 
 # endif
