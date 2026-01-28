@@ -4,7 +4,7 @@
 # include "../include/enums.h"
 # include "../include/struct.h"
 
-# define PROGRAM_VER 0.2
+# define PROGRAM_VER 0.3
 
 /*
  * This function converts the programming language string into an enum
@@ -48,6 +48,7 @@ int build_program_config(int argc, char ** argv, ProgramConfig * config) {
 
     config->ProjectName = argv[2];
     config->ProjectLang = get_language_enum(argv[3]);
+    config->ProgrammingLanguageString = argv[3];
 
     return SUCCESS;
 }

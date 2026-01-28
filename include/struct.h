@@ -5,6 +5,7 @@
 
 typedef struct {
     char * ProjectName;
+    char * ProgrammingLanguageString;
     ProgrammingLanguage ProjectLang;
 } ProgramConfig;
 
