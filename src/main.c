@@ -44,10 +44,12 @@ void display_help_message() {
 
     printf("Commands:\n");
     printf("  new, n <NAME> <LANG>   Create a new project with a given name and programming language\n");
-    printf("  help, h                Display this help message\n\n");
+    printf("  help, h                Display this help message\n");
+    printf("  run, r                 Run the project in the current working directory\n\n");
 
     printf("Examples:\n");
     printf("  tgpc new my-project py\n");
+    printf("  tgpc run");
     printf("  tgpc help\n");
 }
 
