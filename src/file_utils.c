@@ -52,7 +52,39 @@ static char * get_template_by_lang(const ProgrammingLanguage lang) {
     }
 }
 
+static char * get_run_by_lang(const char * programming_lang) {
+    ProgrammingLanguage lang = get_language_enum(programming_lang);
+
+    switch (lang) {
+        case PYTHON:
+            return "python main.py";
+            break;
+        case C:
+            return "gcc main.c -o app && ./app";
+            break;
+        case CPP:
+            return "g++ main.cpp -o app && ./app";
+            break;
+        case RUST:
+            return "cargo run";
+            break;
+        case JAVA:
+            return "javac main.java && java main";
+            break;
+        default: {
+            return NULL;
+        }
+    }
+}
+
 int create_project(const ProgramConfig * config) {
+    if (config->ProjectLang == RUST) {
+        char * cmd = concat_str("cargo new ", config->ProjectName, 1);
+        system(cmd);
+        free(cmd);
+        return SUCCESS;
+    }
+
     char * template_str = get_template_by_lang(config->ProjectLang);
 
     if (template_str == NULL) {
@@ -75,5 +107,29 @@ int create_project(const ProgramConfig * config) {
 
     fprintf(main, "%s\n", template_str);
 
+    fclose(main);
+    return SUCCESS;
+}
+
+int run_project() {
+    FILE * metadata = fopen(".tgpc_meta", "r");
+
+    if (!metadata) {
+        plog("Couldn't find .tgpc_meta file, aborting...", LOG_ERR);
+        return 4;
+    }
+
+    char programming_lang[64];
+
+    fgets(programming_lang, sizeof(programming_lang), metadata);
+    programming_lang[strcspn(programming_lang, "\n")] = 0;
+
+    char * cmd = get_run_by_lang(programming_lang);
+    if (!cmd) {
+        plog("Cannot determine run command for this language\n", LOG_ERR);
+        return DENY;
+    }
+
+    system(cmd);
     return SUCCESS;
 }
