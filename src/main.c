@@ -49,7 +49,7 @@ void display_help_message() {
 
     printf("Examples:\n");
     printf("  tgpc new my-project py\n");
-    printf("  tgpc run");
+    printf("  tgpc run\n");
     printf("  tgpc help\n");
 }
 
