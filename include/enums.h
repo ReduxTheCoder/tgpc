@@ -3,6 +3,7 @@
 
 typedef enum {
     SUCCESS = 0,
+    DENY = 1,
     NOT_ENOUGH_ARGS = 2,
 } Error;
 
@@ -14,5 +15,10 @@ typedef enum {
     JAVA,
     INVALID,
 } ProgrammingLanguage;
+
+typedef enum {
+    LOG_WARN,
+    LOG_ERR,
+} LogLevel;
 
 # endif
