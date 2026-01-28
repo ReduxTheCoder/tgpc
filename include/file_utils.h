@@ -5,5 +5,6 @@
 
 char * build_project_path(const char * project_name);
 int create_project(const ProgramConfig * config);
+int run_project();
 
 # endif
