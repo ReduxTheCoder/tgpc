@@ -5,7 +5,7 @@
 # include "../include/struct.h"
 # include "../include/utils.h"
 
-# define PROGRAM_VER 1.0
+# define PROGRAM_VER "1.0.0"
 
 /*
  * This function converts the programming language string into an enum
@@ -36,7 +36,7 @@ int build_program_config(int argc, char ** argv, ProgramConfig * config) {
 }
 
 void display_help_message() {
-    printf("TGPC - The Greatest Project Creator (%f)\n", PROGRAM_VER);
+    printf("TGPC - The Greatest Project Creator (%s)\n", PROGRAM_VER);
     printf("A C CLI tool to quickly scaffold code projects using templates.\n\n");
 
     printf("Usage:\n");
