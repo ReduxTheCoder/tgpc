@@ -4,7 +4,7 @@
 
 char * concat_str(const char * str1, const char * str2, const int is_path) {
     // (+ 2 is for the null terminators)
-    size_t len = strlen(str1) + strlen(str2) + (is_path ? 1 : 0) + 1;
+    size_t len = strlen(str1) + strlen(str2) + 2;
     
     char * result = malloc(len);
     
