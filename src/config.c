@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
+# include <limits.h>
 # include "../include/config.h"
 # include "../include/file_utils.h"
 # include "../include/utils.h"
@@ -48,7 +49,7 @@ static char * build_config_path() {
     return path;
 }
 
-char * get_run_by_config(const char * programming_lang) {
+char * get_run_cmd_by_config(const char * programming_lang) {
     char * config_path = build_config_path();
     char * config_run_template_path = concat_str(config_path, "run_template.tgpc", 0);
     free(config_path);
@@ -89,3 +90,60 @@ char * get_run_by_config(const char * programming_lang) {
     return result;
 }
 
+int configure_config(ConfigFile config_file, const char * language, const char * cmd) {
+    char * config_dir_path = build_config_path();
+    char * config_file_path = NULL;
+
+    switch (config_file) {
+        case CONFIG_RUN:
+            config_file_path = concat_str(config_dir_path, "run_template.tgpc", 0);
+            break;
+        default:
+            free(config_dir_path);
+            return INTERNAL_PROGRAM_ERR;
+    }
+
+    free(config_dir_path);
+
+    FILE * in = fopen(config_file_path, "r");
+    char tmp_path[PATH_MAX];
+    snprintf(tmp_path, sizeof(tmp_path), "%s.tmp", config_file_path);
+
+    FILE * out = fopen(tmp_path, "w");
+
+    if (!out) {
+        free(config_file_path);
+        if (in) fclose(in);
+        return INTERNAL_PROGRAM_ERR;
+    }
+
+    size_t lang_len = strlen(language);
+    char buf[512];
+    int found = 0;
+
+    if (in) {
+        while (fgets(buf, sizeof(buf), in)) {
+            if (
+                strncmp(buf, language, lang_len) == 0 &&
+                buf[lang_len] == ':' &&
+                buf[lang_len + 1] == ' '
+            ) {
+                found = 1;
+                continue;
+            }
+
+            fputs(buf, out);
+        }
+
+        fclose(in);
+    }
+
+    fprintf(out, "%s: %s\n", language, cmd);
+
+    fclose(out);
+
+    rename(tmp_path, config_file_path);
+    free(config_file_path);
+
+    return SUCCESS;
+}
