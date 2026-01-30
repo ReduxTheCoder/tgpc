@@ -133,7 +133,7 @@ int create_project(const ProgramConfig * config) {
         case GO: {
             char * cmd = concat_str("go mod init \"", config->ProjectName, 1);
             char * tmp = concat_str(cmd, "\"", 0);
-            system(cmd);
+            system(tmp);
             free(cmd);
             free(tmp);
             return SUCCESS;
