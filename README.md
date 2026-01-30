@@ -60,6 +60,5 @@ here's a table showing supported languages and their respective name to use:
 ## OS Support
 Currently, TGPC supports:
 - Linux
-- macOS
 
 Windows support may be added in a future release
