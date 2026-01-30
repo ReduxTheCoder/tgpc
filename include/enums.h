@@ -5,7 +5,11 @@ typedef enum {
     SUCCESS = 0,
     DENY = 1,
     NOT_ENOUGH_ARGS = 2,
-} Error;
+    INTERNAL_PROGRAM_ERR = 3,
+    ITEM_NONEXISTENT = 4,
+    ITEM_NOT_DIR = 5,
+    ITEM_NOT_FILE = 6,
+} ExitCode;
 
 typedef enum {
     PYTHON,
