@@ -5,7 +5,7 @@
 # include "../include/struct.h"
 # include "../include/utils.h"
 
-# define PROGRAM_VER "1.0.0"
+# define PROGRAM_VER "1.1.0"
 
 /*
  * This function converts the programming language string into an enum
