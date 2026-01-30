@@ -43,13 +43,19 @@ tgpc new "my-project" "py"
 
 ## Language Support
 here's a table showing supported languages and their respective name to use:
-| Language | tgpc |
-| -------- | ---- |
-| Python   | py   |
-| C        | c    |
-| C++      | cpp  |
-| Java     | java |
-| Rust     | rs   |
+| Language   | tgpc |
+| ---------- | ---- |
+| Python     | py   |
+| C          | c    |
+| C++        | cpp  |
+| Java       | java |
+| Rust       | rs   |
+| Assembly   | asm  |
+| JavaScript | js   |
+| TypeScript | ts   |
+| Ruby       | rb   |
+| Golang     | go   |
+| PHP        | php  |
 
 ## OS Support
 Currently, TGPC supports:
