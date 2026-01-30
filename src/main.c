@@ -5,14 +5,14 @@
 # include "../include/struct.h"
 # include "../include/utils.h"
 
-# define PROGRAM_VER "1.1.0"
+# define program_ver "1.1.1"
 
 /*
- * This function converts the programming language string into an enum
+ * this function converts the programming language string into an enum
  * from ../include/enums.h
  *
  * lang - the programming language string given by the user
- * returns the ProgrammingLanguage enum
+ * returns the programminglanguage enum
 */
 
 /*
