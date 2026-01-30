@@ -4,7 +4,7 @@
 
 char * concat_str(const char * str1, const char * str2, const int is_path) {
     // (+ 2 is for the null terminators)
-    size_t len = strlen(str1) + strlen(str2) + 2;
+    size_t len = strlen(str1) + strlen(str2) + (is_path ? 1 : 0) + 1;
     
     char * result = malloc(len);
     
@@ -36,6 +36,24 @@ ProgrammingLanguage get_language_enum(const char * lang) {
     }
     if (strcmp(lang, "rs") == 0) {
         return RUST;
+    }
+    if (strcmp(lang, "asm") == 0) {
+        return ASM;
+    }
+    if (strcmp(lang, "js") == 0) {
+        return JS;
+    }
+    if (strcmp(lang, "ts") == 0) {
+        return TS;
+    }
+    if (strcmp(lang, "rb") == 0) {
+        return RB;
+    }
+    if (strcmp(lang, "go") == 0) {
+        return GO;
+    }
+    if (strcmp(lang, "php") == 0) {
+        return PHP;
     }
 
     return INVALID;
