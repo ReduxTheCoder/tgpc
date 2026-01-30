@@ -104,7 +104,7 @@ static char * get_run_by_lang(const char * programming_lang) {
         case JAVA:
             return strdup("javac main.java && java main");
         case ASM:
-            return strdup("nasm -f elf64 main.asm -o main.o && gcc main.o -o main && ./main");
+            return strdup("nasm -f elf64 main.asm -o main.o && ld main.o -o app && ./app");
         case JS:
             return strdup("node main.js");
         case TS:
