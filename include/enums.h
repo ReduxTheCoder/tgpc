@@ -17,6 +17,12 @@ typedef enum {
     C,
     CPP,
     JAVA,
+    ASM,
+    JS,
+    TS,
+    RB,
+    GO,
+    PHP,
     INVALID,
 } ProgrammingLanguage;
 
