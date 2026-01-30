@@ -4,11 +4,37 @@
 # include <stdlib.h>
 # include <string.h>
 # include <sys/stat.h>
+# include <stdbool.h>
 # include "../include/struct.h"
+# include "../include/config.h"
 # include "../include/logging.h"
 # include "../include/utils.h"
 
 typedef char * path;
+
+int dir_exists(const char * path, const int create) {
+    struct stat st;
+    
+    if (stat(path, &st) != 0) {
+        if (create > 0) {
+            int operation_code = mkdir(path, 0755);
+
+            if (operation_code == -1) {
+                return INTERNAL_PROGRAM_ERR;
+            }
+        } else {
+            return ITEM_NONEXISTENT;
+        }
+    }
+
+    if ((st.st_mode & S_IFDIR) == 0) {
+        return ITEM_NOT_DIR;
+
+        plog("Found file called \"tgpc\" in ~/.config instead of directory\nplease remove the file", LOG_ERR);
+    }
+    
+    return SUCCESS;
+}
 
 char * build_project_path(const char * project_name) {
     char cwd[PATH_MAX];
@@ -54,6 +80,12 @@ static char * get_template_by_lang(const ProgrammingLanguage lang) {
 
 static char * get_run_by_lang(const char * programming_lang) {
     ProgrammingLanguage lang = get_language_enum(programming_lang);
+
+    char * run_command = get_run_by_config(lang);
+
+    // if (run_command) {
+    //     return run_command;
+    // }
 
     switch (lang) {
         case PYTHON:
@@ -115,7 +147,7 @@ int run_project() {
     FILE * metadata = fopen(".tgpc_meta", "r");
 
     if (!metadata) {
-        plog("Couldn't find .tgpc_meta file, aborting...", LOG_ERR);
+        plog("Couldn't find .tgpc_meta file, aborting...\n", LOG_ERR);
         return 4;
     }
 
