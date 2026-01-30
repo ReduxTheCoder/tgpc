@@ -29,8 +29,6 @@ int dir_exists(const char * path, const int create) {
 
     if ((st.st_mode & S_IFDIR) == 0) {
         return ITEM_NOT_DIR;
-
-        plog("Found file called \"tgpc\" in ~/.config instead of directory\nplease remove the file", LOG_ERR);
     }
     
     return SUCCESS;
@@ -51,19 +49,26 @@ static char * get_template_by_lang(const ProgrammingLanguage lang) {
     switch (lang) {
         case PYTHON:
             return "print(\"Hello, World!\")";
-            break;
         case C:
             return "# include <stdio.h>\n\nint main(const int argc, const char ** argv) {\n\tprintf(\"Hello, World\\n\");\n\treturn 0;\n}";
-            break;
         case CPP:
             return "# include <iostream>\n\nint main(const int argc, const char ** argv) {\n\tstd::cout << \"Hello, World!\\n\";\n\treturn 0;\n}";
-            break;
         case RUST:
             return "fn main() {\n\tprintln!(\"Hello, World!\");\n}";
-            break;
         case JAVA:
             return "public class main {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println(\"Hello, World!\");\n\t}\n}";
-            break;
+        case ASM:
+            return "global _start\nsection .text\n_start:\n\tmov rax, 60\n\tmov rdi, 0\n\tsyscall";
+        case JS:
+            return "console.log(\"Hello, World!\");";
+        case TS:
+            return "console.log(\"Hello, World!\");";
+        case RB:
+            return "puts \"Hello, World!\"";
+        case GO:
+            return "package main\nimport \"fmt\"\nfunc main() {\n\tfmt.Println(\"Hello, World!\")\n}";
+        case PHP:
+            return "<?php\n echo \"Hello, World!\\n\";\n?>";
         default: {
             char input[64];
             plog("Language not recognized, this will make an empty template file\nAre you sure of this?\n", LOG_WARN);
@@ -81,40 +86,60 @@ static char * get_template_by_lang(const ProgrammingLanguage lang) {
 static char * get_run_by_lang(const char * programming_lang) {
     ProgrammingLanguage lang = get_language_enum(programming_lang);
 
-    char * run_command = get_run_by_config(lang);
+    char * run_command = get_run_by_config(programming_lang);
 
-    // if (run_command) {
-    //     return run_command;
-    // }
+    if (run_command) {
+        return run_command;
+    }
 
     switch (lang) {
         case PYTHON:
-            return "python main.py";
-            break;
+            return strdup("python main.py");
         case C:
-            return "gcc main.c -o app && ./app";
-            break;
+            return strdup("gcc main.c -o app && ./app");
         case CPP:
-            return "g++ main.cpp -o app && ./app";
-            break;
+            return strdup("g++ main.cpp -o app && ./app");
         case RUST:
-            return "cargo run";
-            break;
+            return strdup("cargo run");
         case JAVA:
-            return "javac main.java && java main";
-            break;
-        default: {
+            return strdup("javac main.java && java main");
+        case ASM:
+            return strdup("nasm -f elf64 main.asm -o main.o && gcc main.o -o main && ./main");
+        case JS:
+            return strdup("node main.js");
+        case TS:
+            return strdup("tsc main.ts && node main.js");
+        case RB:
+            return strdup("ruby main.rb");
+        case GO:
+            return strdup("go run main.go");
+        case PHP:
+            return strdup("php main.php");
+        default:
             return NULL;
-        }
     }
 }
 
 int create_project(const ProgramConfig * config) {
-    if (config->ProjectLang == RUST) {
-        char * cmd = concat_str("cargo new ", config->ProjectName, 1);
-        system(cmd);
-        free(cmd);
-        return SUCCESS;
+    switch (config->ProjectLang) {
+        case RUST: {
+            char * cmd = concat_str("cargo new \"", config->ProjectName, 1);
+            char * tmp = concat_str(cmd, "\"", 0);
+            system(tmp);
+            free(cmd);
+            free(tmp);
+            return SUCCESS;
+        }
+        case GO: {
+            char * cmd = concat_str("go mod init \"", config->ProjectName, 1);
+            char * tmp = concat_str(cmd, "\"", 0);
+            system(cmd);
+            free(cmd);
+            free(tmp);
+            return SUCCESS;
+        }
+        default:
+            break;
     }
 
     char * template_str = get_template_by_lang(config->ProjectLang);
@@ -163,5 +188,6 @@ int run_project() {
     }
 
     system(cmd);
+    free(cmd);
     return SUCCESS;
 }
