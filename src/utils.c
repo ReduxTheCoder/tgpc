@@ -94,3 +94,7 @@ ConfigFile get_enum_config_from_str(const char * config_name) {
     
     return get_enum_config_from_str_rust(config_name);
 }
+
+ConfigCmd get_enum_config_cmd_from_str(const char * cmd) {
+    return get_enum_config_cmd_from_str_rust(cmd);
+}

@@ -59,4 +59,9 @@ typedef enum {
     NONE,
 } ConfigFile;
 
+typedef enum {
+    CONFIG_SET,
+    CONFIG_SHOW,
+} ConfigCmd;
+
 # endif
