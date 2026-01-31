@@ -126,10 +126,11 @@ void display_help_message() {
     printf("  tgpc [COMMAND] [ARGS]\n\n");
 
     printf("Commands:\n");
-    printf("  new, n <NAME> <LANG>                              Create a new project with a given name and programming language\n");
-    printf("  help, h                                           Display this help message\n");
-    printf("  run, r                                            Run the project in the current working directory\n");
-    printf("  config, c <CONFIG_NAME> <LANG> <CMD>              Manipulate a config by its name (cmd is the run command)\n\n");
+    printf("  new, n <NAME> <LANG>                               Create a new project with a given name and programming language\n");
+    printf("  help, h                                            Display this help message\n");
+    printf("  run, r                                             Run the project in the current working directory\n");
+    printf("  config, c <COMMAND> <CONFIG_NAME> <LANG> <RUN_CMD> Interact with configuration files\n");
+    printf("  <COMMAND>: set (to manipulate run commands), show (print config file)\n\n");
 
     printf("Languages:\n");
     printf("  - py\n  - rs\n  - c\n  - cpp\n  - java\n  - asm\n  - js\n  - ts\n  - rb\n  - go\n  - php\n\n");
@@ -141,7 +142,8 @@ void display_help_message() {
     printf("  tgpc new my-project py\n");
     printf("  tgpc run\n");
     printf("  tgpc help\n");
-    printf("  tgpc config run py \"python3 main.py\"\n");
+    printf("  tgpc config set run py \"python3 main.py\"\n");
+    printf("  tgpc config show run");
 }
 
 int main(int argc, char ** argv) {
