@@ -90,11 +90,11 @@ char * get_run_cmd_by_config(const char * programming_lang) {
     return result;
 }
 
-int configure_config(ConfigFile config_file, const char * language, const char * cmd) {
+int configure_config(const ConfigParams * params) {
     char * config_dir_path = build_config_path();
     char * config_file_path = NULL;
 
-    switch (config_file) {
+    switch (params->ConfigFilePath) {
         case CONFIG_RUN:
             config_file_path = concat_str(config_dir_path, "run_template.tgpc", 0);
             break;
@@ -117,14 +117,14 @@ int configure_config(ConfigFile config_file, const char * language, const char *
         return INTERNAL_PROGRAM_ERR;
     }
 
-    size_t lang_len = strlen(language);
+    size_t lang_len = strlen(params->ConfigLang);
     char buf[512];
     int found = 0;
 
     if (in) {
         while (fgets(buf, sizeof(buf), in)) {
             if (
-                strncmp(buf, language, lang_len) == 0 &&
+                strncmp(buf, params->ConfigLang, lang_len) == 0 &&
                 buf[lang_len] == ':' &&
                 buf[lang_len + 1] == ' '
             ) {
@@ -138,7 +138,7 @@ int configure_config(ConfigFile config_file, const char * language, const char *
         fclose(in);
     }
 
-    fprintf(out, "%s: %s\n", language, cmd);
+    fprintf(out, "%s: %s\n", params->ConfigLang, params->Command);
 
     fclose(out);
 
