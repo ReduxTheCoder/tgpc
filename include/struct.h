@@ -30,6 +30,7 @@ typedef struct {
 } ProgramConfig;
 
 typedef struct {
+    ConfigCmd ConfigCommand;
     ConfigFile ConfigFilePath;
     char * Command;
     char * ConfigLang;
