@@ -140,6 +140,20 @@ static char * get_run_cmd_by_lang(const char * programming_lang) {
     }
 }
 
+static int create_metadata_file(const char * programming_lang) {
+    FILE * metadata = fopen(".tgpc_meta", "a");
+
+    if (!metadata) {
+        plog(LOG_ERR, "Failed to create .tgpc_meta...\n");
+        return INTERNAL_PROGRAM_ERR;
+    }
+
+    fprintf(metadata, "%s\n", programming_lang);
+    fclose(metadata);
+
+    return SUCCESS;
+}
+
 int create_project(const ProgramConfig * config) {
     switch (config->ProjectLang) {
         case RUST: {
@@ -148,7 +162,9 @@ int create_project(const ProgramConfig * config) {
             system(tmp);
             free(cmd);
             free(tmp);
-            return SUCCESS;
+            chdir(config->ProjectName);
+            int exit_code = create_metadata_file(config->ProgrammingLanguageString);
+            return exit_code;
         }
         case GO: {
             char * cmd = concat_str("go mod init \"", config->ProjectName, 1);
@@ -156,7 +172,9 @@ int create_project(const ProgramConfig * config) {
             system(tmp);
             free(cmd);
             free(tmp);
-            return SUCCESS;
+            chdir(config->ProjectName);
+            int exit_code = create_metadata_file(config->ProgrammingLanguageString);
+            return exit_code;
         }
         default:
             break;
@@ -174,9 +192,7 @@ int create_project(const ProgramConfig * config) {
     chdir(project_parent);
     free(project_parent);
 
-    FILE * metadata = fopen(".tgpc_meta", "a");
-    fprintf(metadata, "%s\n", config->ProgrammingLanguageString);
-    fclose(metadata);
+    int metadata_code = create_metadata_file(config->ProgrammingLanguageString);
 
     char * main_name = concat_str("main.", config->ProgrammingLanguageString, 1);
     FILE * main = fopen(main_name, "a");
