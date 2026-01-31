@@ -56,6 +56,7 @@ typedef enum {
 
 typedef enum {
     CONFIG_RUN,
+    NONE,
 } ConfigFile;
 
 # endif
