@@ -21,9 +21,10 @@
 # ifndef CONFIG_H
 # define CONFIG_H
 
-#include "enums.h"
+# include "../include/enums.h"
+# include "../include/struct.h"
 
 char * get_run_cmd_by_config(const char * programming_lang);
-int configure_config(ConfigFile config_file, const char * language, const char * cmd);
+int configure_config(const ConfigParams * params);
 
 # endif

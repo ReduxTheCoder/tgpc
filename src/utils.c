@@ -86,9 +86,11 @@ ProgrammingLanguage get_language_enum_from_str(const char * lang) {
 }
 
 ConfigFile get_enum_config_from_str(const char * config_name) {
-    if (strcmp(config_name, "run") == 0) {
-        return CONFIG_RUN;
-    }
-
-    return CONFIG_RUN;
+    // if (strcmp(config_name, "run") == 0) {
+    //     return CONFIG_RUN;
+    // }
+    //
+    // return NONE;
+    
+    return get_enum_config_from_str_rust(config_name);
 }
