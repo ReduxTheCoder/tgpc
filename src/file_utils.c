@@ -201,7 +201,7 @@ int create_project(const ProgramConfig * config) {
     fprintf(main, "%s\n", template_str);
 
     fclose(main);
-    return SUCCESS;
+    return metadata_code;
 }
 
 int run_project() {
