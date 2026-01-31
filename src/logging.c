@@ -5,6 +5,7 @@
 
 # define ANSI_RED "\033[31m"
 # define ANSI_YELLOW "\033[33m"
+# define ANSI_GREEN "\033[32m"
 # define ANSI_RST "\033[0m"
 
 void plog(const LogLevel log_level, const char * fmt, ...) {
@@ -12,6 +13,10 @@ void plog(const LogLevel log_level, const char * fmt, ...) {
     va_start(args, fmt);
 
     switch (log_level) {
+        case LOG_GREAT:
+            printf(ANSI_GREEN "[GREAT]: " ANSI_RST);
+            vprintf(fmt, args);
+            break;
         case LOG_ERR:
             printf(ANSI_RED "[ERROR]: " ANSI_RST);
             vprintf(fmt, args);
