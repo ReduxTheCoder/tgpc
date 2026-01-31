@@ -19,6 +19,7 @@
 */
 # include <stdio.h>
 # include <string.h>
+# include <stdbool.h>
 # include "../include/config.h"
 # include "../include/file_utils.h"
 # include "../include/enums.h"
@@ -47,18 +48,18 @@
  * returns an exit code
 */
 int build_program_config(int argc, char ** argv, ProgramConfig * config) {
-    int error = 0;
+    int error = false;
 
     if (argc < 3) {
         plog(LOG_ERR, "Project name wasn't given\n");
-        error = 1;
+        error = true;
     }
     if (argc < 4) {
         plog(LOG_ERR, "Project programming language wasn't given\n");
-        error = 1;
+        error = true;
     }
 
-    if (error > 0) {
+    if (error) {
         return NOT_ENOUGH_ARGS;
     }
 
@@ -69,28 +70,37 @@ int build_program_config(int argc, char ** argv, ProgramConfig * config) {
     return SUCCESS;
 }
 
-int build_config_params(int argc, char ** argv, ConfigParams * config) {
-    int error = 0;
+/*
+ * This function builds the ConfigParam given a pointer of one
+ *
+ * argc - the number of arguments
+ * argv - the table of arguments
+ * config - the pointer to a ConfigParams variable
+ * returns an exit code
+*/
+int build_config_params(int argc, char ** argv, ConfigParams * params) {
+    int error = false;
 
     if (argc < 3) {
         plog(LOG_ERR, "Target config wasn't given\n");
-        error = 1;
+        error = true;
     }
     if (argc < 4) {
         plog(LOG_ERR, "Target config language wasn't given\n");
-        error = 1;
+        error = true;
     }
     if (argc < 5) {
         plog(LOG_ERR, "Target config command wasn't given\n");
+        error = true;
     }
 
-    if (error > 0) {
+    if (error) {
         return NOT_ENOUGH_ARGS;
     }
 
-    config->ConfigFilePath = get_enum_config_from_str(argv[2]);
-    config->ConfigLang = argv[3];
-    config->Command = argv[4];
+    params->ConfigFilePath = get_enum_config_from_str(argv[2]);
+    params->ConfigLang = argv[3];
+    params->Command = argv[4];
 
     return SUCCESS;
 }
@@ -146,12 +156,12 @@ int main(int argc, char ** argv) {
         return run_project();
     }
     else if (strcmp("config", argv[1]) == 0 || strcmp("c", argv[1]) == 0) {
-        ConfigParams config;
-        int exit_code = build_config_params(argc, argv, &config);
+        ConfigParams params;
+        int exit_code = build_config_params(argc, argv, &params);
 
         switch (exit_code) {
             case SUCCESS:
-                return configure_config(config.ConfigFilePath, config.ConfigLang, config.Command);
+                return configure_config(&params);
             case NOT_ENOUGH_ARGS:
                 display_help_message();
                 return exit_code;
