@@ -51,6 +51,7 @@ typedef enum {
 typedef enum {
     LOG_WARN,
     LOG_ERR,
+    LOG_GREAT,
 } LogLevel;
 
 typedef enum {
