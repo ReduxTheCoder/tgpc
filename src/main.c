@@ -28,6 +28,8 @@
 
 # define PROGRAM_VER "1.1.2"
 
+# ifndef TESTING
+
 /*
  * this function converts the programming language string into an enum
  * from ../include/enums.h
@@ -161,3 +163,5 @@ int main(int argc, char ** argv) {
 
     return SUCCESS;
 }
+
+# endif
