@@ -4,6 +4,14 @@ use std::os::raw::c_char;
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
+pub enum ConfigCmd {
+    CONFIG_SET = 0,
+    CONFIG_SHOW,
+    NOT_GIVEN,
+}
+
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
 pub enum ProgrammingLanguage {
     C = 0,
     CPP,
@@ -22,7 +30,7 @@ pub enum ProgrammingLanguage {
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub enum ConfigFile {
-    CONFIG_RUN = 0,
+    CONFIG_RUN,
     NONE,
 }
 
@@ -69,5 +77,24 @@ pub extern "C" fn get_enum_config_from_str_rust(config: *const c_char) -> Config
     match str_slice {
         "run" => ConfigFile::CONFIG_RUN,
         _ => ConfigFile::NONE,
+    }
+}
+
+#[unsafe(no_mangle)]
+pub extern "C" fn get_enum_config_cmd_from_str_rust(cmd: *const c_char) -> ConfigCmd {
+    if cmd.is_null() {
+        return ConfigCmd::NOT_GIVEN;
+    }
+
+    let c_str = unsafe { CStr::from_ptr(cmd) };
+    let str_slice = match c_str.to_str() {
+        Ok(s) => s,
+        Err(_) => return ConfigCmd::NOT_GIVEN,
+    };
+
+    match str_slice {
+        "set" => ConfigCmd::CONFIG_SET,
+        "show" => ConfigCmd::CONFIG_SHOW,
+        _ => ConfigCmd::NOT_GIVEN,
     }
 }
