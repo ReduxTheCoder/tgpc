@@ -23,6 +23,7 @@
 # include "../include/enums.h"
 
 char * concat_str(const char * str1, const char * str2, const int is_path);
-ProgrammingLanguage get_language_enum(const char * lang);
+ProgrammingLanguage get_language_enum_from_str(const char * lang);
+ConfigFile get_enum_config_from_str(const char * config_name);
 
 # endif

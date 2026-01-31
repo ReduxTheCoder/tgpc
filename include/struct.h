@@ -29,4 +29,10 @@ typedef struct {
     ProgrammingLanguage ProjectLang;
 } ProgramConfig;
 
+typedef struct {
+    ConfigFile ConfigFilePath;
+    char * Command;
+    char * ConfigLang;
+} ConfigParams;
+
 # endif

@@ -30,26 +30,32 @@ typedef enum {
     ITEM_NONEXISTENT = 4,
     ITEM_NOT_DIR = 5,
     ITEM_NOT_FILE = 6,
+    INCORRECT_USAGE = 7,
 } ExitCode;
 
 typedef enum {
-    PYTHON,
-    RUST,
-    C,
+    C = 0,
     CPP,
+    PYTHON,
     JAVA,
+    RUST,
     ASM,
     JS,
     TS,
     RB,
     GO,
     PHP,
-    INVALID,
+    INVALID
 } ProgrammingLanguage;
 
 typedef enum {
     LOG_WARN,
     LOG_ERR,
+    LOG_GREAT,
 } LogLevel;
+
+typedef enum {
+    CONFIG_RUN,
+} ConfigFile;
 
 # endif

@@ -23,6 +23,7 @@
 
 #include "enums.h"
 
-char * get_run_by_config(const char * programming_lang);
+char * get_run_cmd_by_config(const char * programming_lang);
+int configure_config(ConfigFile config_file, const char * language, const char * cmd);
 
 # endif

@@ -1,4 +1,3 @@
-
 /*
  * TGPC - Command-line project scaffolder
  * Copyright (c) 2026 ReduxTheCoder
@@ -24,6 +23,6 @@
 
 # include "enums.h"
 
-void plog(const char * msg, const LogLevel log_level);
+void plog(const LogLevel log_level, const char * fmt, ...);
 
 # endif

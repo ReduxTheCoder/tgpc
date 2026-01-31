@@ -91,7 +91,7 @@ static char * get_template_by_lang(const ProgrammingLanguage lang) {
             return "<?php\n echo \"Hello, World!\\n\";\n?>";
         default: {
             char input[64];
-            plog("Language not recognized, this will make an empty template file\nAre you sure of this?\n", LOG_WARN);
+            plog(LOG_WARN, "Language not recognized, this will make an empty template file\nAre you sure of this?\n");
             printf("(y/n) ");
 
             if (fgets(input, sizeof(input), stdin) != NULL && strcmp(input, "y\n") == 0) {
@@ -103,10 +103,10 @@ static char * get_template_by_lang(const ProgrammingLanguage lang) {
     }
 }
 
-static char * get_run_by_lang(const char * programming_lang) {
-    ProgrammingLanguage lang = get_language_enum(programming_lang);
+static char * get_run_cmd_by_lang(const char * programming_lang) {
+    ProgrammingLanguage lang = get_language_enum_from_str(programming_lang);
 
-    char * run_command = get_run_by_config(programming_lang);
+    char * run_command = get_run_cmd_by_config(programming_lang);
 
     if (run_command) {
         return run_command;
@@ -164,7 +164,7 @@ int create_project(const ProgramConfig * config) {
 
     char * template_str = get_template_by_lang(config->ProjectLang);
 
-    if (template_str == NULL) {
+    if (!template_str) {
         return DENY;
     }
 
@@ -192,7 +192,7 @@ int run_project() {
     FILE * metadata = fopen(".tgpc_meta", "r");
 
     if (!metadata) {
-        plog("Couldn't find .tgpc_meta file, aborting...\n", LOG_ERR);
+        plog(LOG_ERR, "Couldn't find .tgpc_meta file, aborting...\n");
         return 4;
     }
 
@@ -201,9 +201,9 @@ int run_project() {
     fgets(programming_lang, sizeof(programming_lang), metadata);
     programming_lang[strcspn(programming_lang, "\n")] = 0;
 
-    char * cmd = get_run_by_lang(programming_lang);
+    char * cmd = get_run_cmd_by_lang(programming_lang);
     if (!cmd) {
-        plog("Cannot determine run command for this language\n", LOG_ERR);
+        plog(LOG_ERR, "Cannot determine run command for this language\n");
         return DENY;
     }
 
