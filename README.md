@@ -15,12 +15,15 @@ TGPC currently lacks lots of his barebones features, as it's still in developmen
 New features will be added in future releases
 
 ## Installation
-First clone the repository and then build using the makefile:
+First clone the repository and then install using the makefile:
 ```bash
 git clone https://github.com/ReduxTheCoder/tgpc
 cd tgpc
-make build
+make install
 ```
+> **Note**: the makefile automatically assumes that `~/.local/bin` is in your path, as it installs the program there, if you wish to move the binary in another directory,
+> use `make release && mv bin/tgpc [DIR_PATH]`
+
 Optionally you can remove the cloned repository:
 ```bash
 cd ..
