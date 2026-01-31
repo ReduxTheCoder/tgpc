@@ -8,6 +8,8 @@ CFLAGS_RELEASE := -O3 -flto -DNDEBUG -mtune=generic -march=x86-64 $(INCLUDE) $(R
 
 BIN := bin/tgpc
 BIN_DEBUG := bin/tgpc-debug
+TEST_BIN := bin/tgpc-tests
+TEST_SRC := tests/tests.c
 
 all: $(BIN_DEBUG)
 
@@ -27,4 +29,11 @@ relbuild: release
 	mv ./$(BIN) ~/.local/bin/tgpc
 
 clean:
-	rm -f $(BIN) $(BIN_DEBUG)
+	rm -f $(BIN) $(BIN_DEBUG) $(TEST_BIN)
+
+# Test target
+tests: $(TEST_BIN)
+	./$(TEST_BIN)
+
+$(TEST_BIN): $(TEST_SRC) $(SRC)
+	gcc $(TEST_SRC) $(SRC) $(CFLAGS_DEBUG) -DTESTING -o $(TEST_BIN)
