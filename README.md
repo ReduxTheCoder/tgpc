@@ -10,7 +10,6 @@ TGPC is a C command-line tool to quickly scaffold code projects using templates.
 ## Project Status
 TGPC currently lacks lots of his barebones features, as it's still in development:
 - Windows support
-- Commands
 - Additional language support
 
 New features will be added in future releases
@@ -60,6 +59,5 @@ here's a table showing supported languages and their respective name to use:
 ## OS Support
 Currently, TGPC supports:
 - Linux
-- macOS
 
 Windows support may be added in a future release
