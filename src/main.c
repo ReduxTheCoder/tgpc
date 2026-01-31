@@ -78,18 +78,32 @@ int build_program_config(int argc, char ** argv, ProgramConfig * config) {
  * config - the pointer to a ConfigParams variable
  * returns an exit code
 */
-int build_config_params(int argc, char ** argv, ConfigParams * params) {
-    int error = false;
+int build_config_set_params(int argc, char ** argv, ConfigParams * params) {
+    bool error = false;
 
     if (argc < 3) {
+        plog(LOG_ERR, "Command wasn't given\n");
+        error = true;
+    }
+
+    params->ConfigCommand = get_enum_config_cmd_from_str(argv[2]);
+
+    if (argc < 4) {
         plog(LOG_ERR, "Target config wasn't given\n");
         error = true;
     }
-    if (argc < 4) {
+
+    params->ConfigFilePath = get_enum_config_from_str(argv[3]);
+
+    if (params->ConfigCommand == CONFIG_SHOW) {
+        return SUCCESS;
+    }
+
+    if (argc < 5) {
         plog(LOG_ERR, "Target config language wasn't given\n");
         error = true;
     }
-    if (argc < 5) {
+    if (argc < 6) {
         plog(LOG_ERR, "Target config command wasn't given\n");
         error = true;
     }
@@ -98,9 +112,8 @@ int build_config_params(int argc, char ** argv, ConfigParams * params) {
         return NOT_ENOUGH_ARGS;
     }
 
-    params->ConfigFilePath = get_enum_config_from_str(argv[2]);
-    params->ConfigLang = argv[3];
-    params->Command = argv[4];
+    params->ConfigLang = argv[4];
+    params->Command = argv[5];
 
     return SUCCESS;
 }
@@ -157,11 +170,16 @@ int main(int argc, char ** argv) {
     }
     else if (strcmp("config", argv[1]) == 0 || strcmp("c", argv[1]) == 0) {
         ConfigParams params;
-        int exit_code = build_config_params(argc, argv, &params);
+        
+        int exit_code = build_config_set_params(argc, argv, &params);
 
         switch (exit_code) {
             case SUCCESS:
-                return configure_config(&params);
+                if (params.ConfigCommand == CONFIG_SHOW) {
+                    return show_config(params.ConfigFilePath);
+                } else {
+                    return configure_config(&params);
+                }
             case NOT_ENOUGH_ARGS:
                 display_help_message();
                 return exit_code;

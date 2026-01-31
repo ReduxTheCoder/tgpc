@@ -22,6 +22,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <stdbool.h>
 # include "../include/config.h"
 # include "../include/file_utils.h"
 # include "../include/utils.h"
@@ -110,7 +111,6 @@ int configure_config(const ConfigParams * params) {
     snprintf(tmp_path, sizeof(tmp_path), "%s.tmp", config_file_path);
 
     FILE * out = fopen(tmp_path, "w");
-
     if (!out) {
         free(config_file_path);
         if (in) fclose(in);
@@ -147,3 +147,50 @@ int configure_config(const ConfigParams * params) {
 
     return SUCCESS;
 }
+
+int show_config(ConfigFile config_file_name) {
+    char * config_dir_path = build_config_path();
+    char * config_file_path = NULL;
+
+    switch (config_file_name) {
+        case CONFIG_RUN:
+            config_file_path = concat_str(config_dir_path, "run_template.tgpc", 0);
+            break;
+        default:
+            free(config_dir_path);
+            return INTERNAL_PROGRAM_ERR;
+    }
+
+    free(config_dir_path);
+
+    FILE * in = fopen(config_file_path, "r");
+
+    char buf[512];
+
+    if (in) {
+        while (fgets(buf, sizeof(buf), in)) {
+            fputs(buf, stdout);
+        }
+
+        fclose(in);
+    }
+
+    free(config_file_path);
+
+    return SUCCESS;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
