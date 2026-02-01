@@ -108,6 +108,9 @@ int main(int argc, char ** argv) {
             return INTERNAL_PROGRAM_ERR;
         }
 
+        case COMMAND_DATA:
+            return show_project_metadata();
+
         case COMMAND_UNKNOWN:
             plog(LOG_ERR, "Unknown command '%s'\n", argv[1]);
             return INCORRECT_USAGE;

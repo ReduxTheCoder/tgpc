@@ -212,7 +212,7 @@ int run_project() {
 
     if (!metadata) {
         plog(LOG_ERR, "Couldn't find .tgpc_meta file, aborting...\n");
-        return 4;
+        return ITEM_NONEXISTENT;
     }
 
     char programming_lang[64];
@@ -228,5 +228,24 @@ int run_project() {
 
     system(cmd);
     free(cmd);
+    return SUCCESS;
+}
+
+int show_project_metadata() {
+    FILE * metadata = fopen(".tgpc_meta", "r");
+
+    if (!metadata) {
+        plog(LOG_ERR, "Couldn't find .tgpc_meta file, aborting...\n");
+        return ITEM_NONEXISTENT;
+    }
+
+    char buf[512];
+
+    while (fgets(buf, sizeof(buf), metadata)) {
+        fputs(buf, stdout);
+    }
+
+    fclose(metadata);
+
     return SUCCESS;
 }
