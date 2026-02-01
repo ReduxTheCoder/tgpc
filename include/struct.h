@@ -28,6 +28,7 @@ typedef struct {
     char * ProgrammingLanguageString;
     ProgrammingLanguage ProjectLang;
 } ProgramConfig;
+int build_program_config(int argc, char ** argv, ProgramConfig * config);
 
 typedef struct {
     ConfigCmd ConfigCommand;
@@ -35,5 +36,6 @@ typedef struct {
     char * Command;
     char * ConfigLang;
 } ConfigParams;
+int build_config_params(int argc, char ** argv, ConfigParams * params);
 
 # endif
