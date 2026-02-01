@@ -25,7 +25,7 @@ run: $(BIN_DEBUG)
 build: release
 	mv ./$(BIN) ~/.local/bin/tgpc
 
-relbuild: release
+install: release
 	mv ./$(BIN) ~/.local/bin/tgpc
 
 clean:
