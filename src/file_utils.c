@@ -24,6 +24,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <sys/stat.h>
+# include <time.h>
 # include <stdbool.h>
 # include "../include/struct.h"
 # include "../include/config.h"
@@ -148,7 +149,9 @@ static int create_metadata_file(const char * programming_lang) {
         return INTERNAL_PROGRAM_ERR;
     }
 
-    fprintf(metadata, "%s\n", programming_lang);
+    time_t current_time;
+
+    fprintf(metadata, "%s\n%s\n", programming_lang, ctime(&current_time));
     fclose(metadata);
 
     return SUCCESS;
