@@ -42,6 +42,7 @@ void display_help_message() {
     printf("├─● new, n <NAME> <LANG>                               Create a new project with a given name and programming language\n");
     printf("├─● help, h                                            Display this help message\n");
     printf("├─● run, r                                             Run the project in the current working directory\n");
+    printf("├─● data, d                                            Print the current project's data\n");
     printf("└─● config, c <COMMAND>                                Interact with configuration files\n");
     printf("      set, w  <CONFIG_NAME> <LANG> <RUN_CMD>\n");
     printf("      show, s  <CONFIG_NAME>\n\n");
@@ -56,6 +57,7 @@ void display_help_message() {
     printf("├─● tgpc new my-project py\n");
     printf("├─● tgpc run\n");
     printf("├─● tgpc help\n");
+    printf("├─● tgpc data\n");
     printf("├─● tgpc config set run py \"python3 main.py\"\n");
     printf("└─● tgpc config show run\n");
 }
