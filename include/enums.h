@@ -64,4 +64,12 @@ typedef enum {
     CONFIG_SHOW,
 } ConfigCmd;
 
+typedef enum {
+    COMMAND_NEW,
+    COMMAND_HELP,
+    COMMAND_RUN,
+    COMMAND_CONFIG,
+    COMMAND_UNKNOWN,
+} TgpcCommand;
+
 # endif
