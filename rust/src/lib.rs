@@ -35,6 +35,7 @@ pub enum TgpcCommand {
     COMMAND_HELP,
     COMMAND_RUN,
     COMMAND_CONFIG,
+    COMMAND_DATA,
     COMMAND_UNKNOWN,
 }
 
@@ -79,6 +80,7 @@ pub extern "C" fn get_tgpc_command_from_str_rust(cmd: *const c_char) -> TgpcComm
         "r" | "run" => TgpcCommand::COMMAND_RUN,
         "c" | "config" => TgpcCommand::COMMAND_CONFIG,
         "n" | "new" => TgpcCommand::COMMAND_NEW,
+        "d" | "data" => TgpcCommand::COMMAND_DATA,
         _ => TgpcCommand::COMMAND_UNKNOWN,
     }
 }

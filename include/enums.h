@@ -69,6 +69,7 @@ typedef enum {
     COMMAND_HELP,
     COMMAND_RUN,
     COMMAND_CONFIG,
+    COMMAND_DATA,
     COMMAND_UNKNOWN,
 } TgpcCommand;
 

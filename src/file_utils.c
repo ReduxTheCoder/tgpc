@@ -24,6 +24,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <sys/stat.h>
+# include <time.h>
 # include <stdbool.h>
 # include "../include/struct.h"
 # include "../include/config.h"
@@ -148,7 +149,9 @@ static int create_metadata_file(const char * programming_lang) {
         return INTERNAL_PROGRAM_ERR;
     }
 
-    fprintf(metadata, "%s\n", programming_lang);
+    time_t current_time;
+
+    fprintf(metadata, "%s\n%s\n", programming_lang, ctime(&current_time));
     fclose(metadata);
 
     return SUCCESS;
@@ -209,7 +212,7 @@ int run_project() {
 
     if (!metadata) {
         plog(LOG_ERR, "Couldn't find .tgpc_meta file, aborting...\n");
-        return 4;
+        return ITEM_NONEXISTENT;
     }
 
     char programming_lang[64];
@@ -225,5 +228,24 @@ int run_project() {
 
     system(cmd);
     free(cmd);
+    return SUCCESS;
+}
+
+int show_project_metadata() {
+    FILE * metadata = fopen(".tgpc_meta", "r");
+
+    if (!metadata) {
+        plog(LOG_ERR, "Couldn't find .tgpc_meta file, aborting...\n");
+        return ITEM_NONEXISTENT;
+    }
+
+    char buf[512];
+
+    while (fgets(buf, sizeof(buf), metadata)) {
+        fputs(buf, stdout);
+    }
+
+    fclose(metadata);
+
     return SUCCESS;
 }
