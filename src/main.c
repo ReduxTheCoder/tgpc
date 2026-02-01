@@ -26,7 +26,7 @@
 # include "../include/utils.h"
 # include "../include/logging.h"
 
-# define PROGRAM_VER "1.2.0"
+# define PROGRAM_VER "1.2.1"
 
 # ifndef TESTING
 
