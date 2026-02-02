@@ -30,6 +30,9 @@
 # include "../include/config.h"
 # include "../include/logging.h"
 # include "../include/utils.h"
+# include "../include/version.h"
+
+# define TGPC_META_NAME ".tgpc_meta"
 
 typedef char * path;
 
@@ -165,7 +168,7 @@ static int create_metadata_file(const char * programming_lang) {
         return INTERNAL_PROGRAM_ERR;
     }
 
-    fprintf(metadata, "%s\n%s\n", programming_lang, buf);
+    fprintf(metadata, "%s\n%s\n%s", programming_lang, buf, PROGRAM_VER);
     fclose(metadata);
 
     return SUCCESS;
@@ -277,3 +280,38 @@ int show_project_metadata() {
 
     return SUCCESS;
 }
+
+int update_project_metadata() {
+    FILE * metadata = fopen(".tgpc_meta", "r");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

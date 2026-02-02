@@ -23,10 +23,9 @@
 #include "../include/logging.h"
 #include "../include/struct.h"
 #include "../include/utils.h"
+#include "../include/version.h"
 #include <stdbool.h>
 #include <stdio.h>
-
-#define PROGRAM_VER "1.2.1"
 
 #ifndef TESTING
 
