@@ -82,6 +82,7 @@ pub extern "C" fn get_tgpc_command_from_str_rust(cmd: *const c_char) -> TgpcComm
         "c" | "config" => TgpcCommand::COMMAND_CONFIG,
         "n" | "new" => TgpcCommand::COMMAND_NEW,
         "d" | "data" => TgpcCommand::COMMAND_DATA,
+        "u" | "update" => TgpcCommand::COMMAND_UPDATE,
         _ => TgpcCommand::COMMAND_UNKNOWN,
     }
 }
