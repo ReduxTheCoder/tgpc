@@ -27,7 +27,7 @@
 # include "../include/file_utils.h"
 # include "../include/utils.h"
 
-static char * build_config_path() {
+char * build_config_path() {
     const char * xdg = getenv("XDG_CONFIG_HOME");
     if (xdg && *xdg) {
         return strdup(xdg);

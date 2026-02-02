@@ -21,9 +21,9 @@
 # include <assert.h>
 # include <string.h>
 # include <stdlib.h>
-# include <unistd.h>
 # include <stdio.h>
-# include "../include/tests.h"
+// # include "../include/tests.h"
+# include "../include/config.h"
 # include "../include/enums.h"
 # include "../include/logging.h"
 # include "../include/utils.h"
@@ -34,24 +34,20 @@ int test_concat_str() {
     char * res = concat_str("foo", "bar", 0);
     if (strcmp(res, "foo/bar") == 0) {
         successes++;
-        plog(LOG_GREAT, "concat_str() directory test PASSED! ");
+        plog(LOG_GREAT, "concat_str() directory test PASSED!\n");
     } else {
-        plog(LOG_ERR, "concat_str() test FAILED! ");
+        plog(LOG_ERR, "concat_str() test FAILED!\n");
     }
-
-    plog(LOG_WARN, "(%d/2)\n", successes);
 
     free(res);
 
     res = concat_str("bar", "foo", 1);
     if (strcmp(res, "barfoo") == 0) {
         successes++;
-        plog(LOG_GREAT, "concat_str() test PASSED! ");
+        plog(LOG_GREAT, "concat_str() test PASSED!\n");
     } else {
-        plog(LOG_ERR, "concat_str() test FAILED! ");
+        plog(LOG_ERR, "concat_str() test FAILED!\n");
     }
-
-    plog(LOG_WARN, "(%d/2)\n", successes);
 
     free(res);
 
@@ -64,23 +60,19 @@ int test_get_language_enum_from_str() {
 
     if (lang == CPP) {
         successes++;
-        plog(LOG_GREAT, "get_language_enum_from_str() test PASSED! ");
+        plog(LOG_GREAT, "get_language_enum_from_str() test PASSED!\n");
     } else {
-        plog(LOG_ERR, "get_language_enum_from_str() test FAILED! ");
+        plog(LOG_ERR, "get_language_enum_from_str() test FAILED!\n");
     }
-
-    plog(LOG_WARN, "(%d/2)\n", successes);
 
     lang = get_language_enum_from_str("py");
 
     if (lang == PYTHON) {
         successes++;
-        plog(LOG_GREAT, "get_language_enum_from_str() test PASSED! ");
+        plog(LOG_GREAT, "get_language_enum_from_str() test PASSED!\n");
     } else {
-        plog(LOG_ERR, "get_language_enum_from_str() test FAILED! ");
+        plog(LOG_ERR, "get_language_enum_from_str() test FAILED!\n");
     }
-
-    plog(LOG_WARN, "(%d/2)\n", successes);
 
     return successes;
 }
@@ -93,14 +85,22 @@ int test_get_enum_config_from_str() {
 
     if (res == CONFIG_RUN) {
         successes++;
-        plog(LOG_GREAT, "get_enum_config_from_str() test PASSED! ");
+        plog(LOG_GREAT, "get_enum_config_from_str() test PASSED!\n");
     } else {
-        plog(LOG_ERR, "get_enum_config_from_str() test FAILED! ");
+        plog(LOG_ERR, "get_enum_config_from_str() test FAILED!\n");
     }
 
-    plog(LOG_WARN, "(%d/2)\n", successes);
-
     return successes;
+}
+
+int test_build_config_path() {
+    int successes = 0;
+
+    char * res = build_config_path();
+
+    if (strcmp(res, "/home/San_Genna/.config/tgpc") == 0) {
+
+    }
 }
 
 int main() {
@@ -127,8 +127,6 @@ int main() {
     total_tests += 1;
     printf("\n");
 
-    plog(LOG_WARN, "FINAL JUDGEMENT...\n");
-    sleep(2);
     if (total_passed == total_tests) {
         plog(LOG_GREAT, "ALL TESTS PASSED!\n");
     } else {

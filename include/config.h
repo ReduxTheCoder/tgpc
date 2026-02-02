@@ -24,6 +24,7 @@
 # include "../include/enums.h"
 # include "../include/struct.h"
 
+char * build_config_path();
 char * get_run_cmd_by_config(const char * programming_lang);
 int configure_config(const ConfigParams * params);
 int show_config(ConfigFile config_file_name);
