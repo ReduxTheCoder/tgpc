@@ -23,10 +23,9 @@
 #include "../include/logging.h"
 #include "../include/struct.h"
 #include "../include/utils.h"
+#include "../include/version.h"
 #include <stdbool.h>
 #include <stdio.h>
-
-#define PROGRAM_VER "1.2.1"
 
 #ifndef TESTING
 
@@ -119,6 +118,9 @@ int main(int argc, char **argv) {
 	case COMMAND_DATA:
 		return show_project_metadata();
 
+    case COMMAND_UPDATE:
+        return update_project_metadata();
+
 	case COMMAND_UNKNOWN:
 		plog(LOG_ERR, "Unknown command '%s'\n", argv[1]);
 		return INCORRECT_USAGE;
@@ -129,44 +131,6 @@ int main(int argc, char **argv) {
 	}
 
 	return SUCCESS;
-	// if (strcmp("new", argv[1]) == 0 || strcmp("n", argv[1]) == 0) {
-	//     ProgramConfig config;
-	//     int exit_code = build_program_config(argc, argv, &config);
-	//
-	//     switch (exit_code) {
-	//         case SUCCESS:
-	//             return create_project(&config);
-	//         case NOT_ENOUGH_ARGS:
-	//             display_help_message();
-	//             return exit_code;
-	//     }
-	// }
-	// else if (strcmp("help", argv[1]) == 0 || strcmp("h", argv[1]) == 0) {
-	//     display_help_message();
-	// }
-	// else if (strcmp("run", argv[1]) == 0 || strcmp("r", argv[1]) == 0) {
-	//     return run_project();
-	// }
-	// else if (strcmp("config", argv[1]) == 0 || strcmp("c", argv[1]) == 0) {
-	//     ConfigParams params;
-	//
-	//     int exit_code = build_config_set_params(argc, argv, &params);
-	//
-	//     switch (exit_code) {
-	//         case SUCCESS:
-	//             if (params.ConfigCommand == CONFIG_SHOW) {
-	//                 return show_config(params.ConfigFilePath);
-	//             } else {
-	//                 return configure_config(&params);
-	//             }
-	//         case NOT_ENOUGH_ARGS:
-	//             display_help_message();
-	//             return exit_code;
-	//     }
-	// } else {
-	//     plog(LOG_ERR, "Unknown command '%s'\n", argv[1]);
-	//     return INCORRECT_USAGE;
-	// }
 }
 
 #endif

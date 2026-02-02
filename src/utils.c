@@ -20,11 +20,11 @@
 #include "utils.h"
 #include "../include/enums.h"
 #include "../include/rust_bridge.h"
-#include <limits.h> // optional, if already used
-#include <stddef.h> // for size_t, NULL
-#include <stdio.h>  // for snprintf, perror
-#include <stdlib.h> // for malloc
-#include <string.h> // for strlen, strcmp
+#include <limits.h>
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 char *concat_str(const char *str1, const char *str2, const int is_path) {
 	// (+ 2 is for the null terminators)
@@ -53,52 +53,10 @@ char *concat_str(const char *str1, const char *str2, const int is_path) {
  * returns the programminglanguage enum
  */
 ProgrammingLanguage get_language_enum_from_str(const char *lang) {
-	// if (strcmp(lang, "c") == 0) {
-	//     return C;
-	// }
-	// if (strcmp(lang, "cpp") == 0) {
-	//     return CPP;
-	// }
-	// if (strcmp(lang, "py") == 0) {
-	//     return PYTHON;
-	// }
-	// if (strcmp(lang, "java") == 0) {
-	//     return JAVA;
-	// }
-	// if (strcmp(lang, "rs") == 0) {
-	//     return RUST;
-	// }
-	// if (strcmp(lang, "asm") == 0) {
-	//     return ASM;
-	// }
-	// if (strcmp(lang, "js") == 0) {
-	//     return JS;
-	// }
-	// if (strcmp(lang, "ts") == 0) {
-	//     return TS;
-	// }
-	// if (strcmp(lang, "rb") == 0) {
-	//     return RB;
-	// }
-	// if (strcmp(lang, "go") == 0) {
-	//     return GO;
-	// }
-	// if (strcmp(lang, "php") == 0) {
-	//     return PHP;
-	// }
-	//
-	// return INVALID;
-
 	return get_language_enum_from_str_rust(lang);
 }
 
 ConfigFile get_enum_config_from_str(const char *config_name) {
-	// if (strcmp(config_name, "run") == 0) {
-	//     return CONFIG_RUN;
-	// }
-	//
-	// return NONE;
-
 	return get_enum_config_from_str_rust(config_name);
 }
 
