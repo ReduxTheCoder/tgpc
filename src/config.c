@@ -119,7 +119,6 @@ int configure_config(const ConfigParams * params) {
 
     size_t lang_len = strlen(params->ConfigLang);
     char buf[512];
-    int found = 0;
 
     if (in) {
         while (fgets(buf, sizeof(buf), in)) {
@@ -128,7 +127,6 @@ int configure_config(const ConfigParams * params) {
                 buf[lang_len] == ':' &&
                 buf[lang_len + 1] == ' '
             ) {
-                found = 1;
                 continue;
             }
 

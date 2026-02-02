@@ -74,4 +74,10 @@ typedef enum {
     COMMAND_UNKNOWN,
 } TgpcCommand;
 
+typedef enum {
+    LINE_LANGUAGE = 0,
+    LINE_CREATION_DATE = 1,
+    LINE_PROGRAM_VER = 2,
+} MetadataLine;
+
 # endif
