@@ -149,9 +149,23 @@ static int create_metadata_file(const char * programming_lang) {
         return INTERNAL_PROGRAM_ERR;
     }
 
-    time_t current_time;
+    time_t current_time = time(NULL);
+    if (current_time == (time_t)-1) {
+        fclose(metadata);
+        return INTERNAL_PROGRAM_ERR;
+    }
 
-    fprintf(metadata, "%s\n%s\n", programming_lang, ctime(&current_time));
+    struct tm tm;
+    localtime_r(&current_time, &tm);
+
+    char buf[32];
+
+    if (strftime(buf, sizeof(buf), "%d/%m/%Y %H:%M:%S", &tm) == 0) {
+        fclose(metadata);
+        return INTERNAL_PROGRAM_ERR;
+    }
+
+    fprintf(metadata, "%s\n%s\n", programming_lang, buf);
     fclose(metadata);
 
     return SUCCESS;
@@ -241,8 +255,22 @@ int show_project_metadata() {
 
     char buf[512];
 
+    size_t current_line = 0;
+    const size_t language_data_line = 1;
+    const size_t time_data_line = 2;
+
     while (fgets(buf, sizeof(buf), metadata)) {
-        fputs(buf, stdout);
+        current_line++;
+        switch (current_line) {
+            case language_data_line:
+                printf("Language: %s", buf);
+                break;
+            case time_data_line:
+                printf("Created on: %s", buf);
+                break;
+            default:
+                break;
+        }
     }
 
     fclose(metadata);
