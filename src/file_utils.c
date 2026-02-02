@@ -293,6 +293,11 @@ int show_project_metadata() {
 int update_project_metadata() {
 	FILE *metadata = fopen(".tgpc_meta", "r");
 
+    if (!metadata) {
+		plog(LOG_ERR, "Couldn't find .tgpc_meta file, aborting...\n");
+		return ITEM_NONEXISTENT;
+    }
+
 	char buf[512];
 	char *program_version;
 	size_t current_line = 0;
@@ -305,10 +310,11 @@ int update_project_metadata() {
 		default:
 			break;
 		}
+        current_line++;
 	}
 
 	if (strcmp(PROGRAM_VER, program_version) == 0) {
-		plog(LOG_ERR, "Project metadata file is up to date.");
+		plog(LOG_ERR, "Project metadata file is up to date\n");
 		return SUCCESS;
 	}
 
