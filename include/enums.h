@@ -65,13 +65,13 @@ typedef enum {
 } ConfigCmd;
 
 typedef enum {
-    COMMAND_NEW,
+    COMMAND_NEW = 0,
     COMMAND_HELP,
     COMMAND_RUN,
     COMMAND_CONFIG,
     COMMAND_DATA,
     COMMAND_UPDATE,
-    COMMAND_UNKNOWN,
+    COMMAND_UNKNOWN
 } TgpcCommand;
 
 typedef enum {

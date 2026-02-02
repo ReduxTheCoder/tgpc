@@ -310,10 +310,11 @@ int update_project_metadata() {
 		default:
 			break;
 		}
+        current_line++;
 	}
 
 	if (strcmp(PROGRAM_VER, program_version) == 0) {
-		plog(LOG_ERR, "Project metadata file is up to date.");
+		plog(LOG_ERR, "Project metadata file is up to date\n");
 		return SUCCESS;
 	}
 
