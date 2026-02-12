@@ -1,5 +1,5 @@
 # Paths
-SRC := src/*.cpp
+SRC := $(shell find src -name "*.cpp")
 INCLUDE := -Iinclude
 
 CFLAGS_DEBUG := -Wall -Wextra -pedantic-errors -g $(INCLUDE)
