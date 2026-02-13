@@ -1,0 +1,18 @@
+[
+  {
+    "file": "src/main.cpp",
+    "arguments": [
+      "g++",
+      "src/main.cpp",
+      "-Wall",
+      "-Wextra",
+      "-pedantic-errors",
+      "-g",
+      "-Iinclude",
+      "-o",
+      "bin/tgpc-debug"
+    ],
+    "directory": "/home/San_Genna/Code/C/tgpc",
+    "output": "bin/tgpc-debug"
+  }
+]
