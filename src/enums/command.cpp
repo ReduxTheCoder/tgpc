@@ -1,5 +1,5 @@
-#include <enums/command.hpp>
-#include <enums/exit_code.hpp>
+#include "enums/command.hpp"
+#include "enums/exit_code.hpp"
 #include <string>
 
 TgpcCommand get_enum_command_from_string(int argc, const char **argv) {
