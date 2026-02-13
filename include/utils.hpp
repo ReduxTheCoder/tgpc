@@ -5,6 +5,6 @@
 
 namespace utils {
 std::string get_time_and_date(void);
-}
+} // namespace utils
 
 #endif

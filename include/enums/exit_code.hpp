@@ -10,6 +10,8 @@ enum class ExitCode {
     INCORRECT_PROGRAM_USAGE,
     UNKNOWN_COMMAND,
     INTERNAL_PROGRAM_ERROR,
+    ITEM_EXISTS,
+    METADATA_NOT_FOUND
 };
 
 struct ExitCodeException : public std::exception {
