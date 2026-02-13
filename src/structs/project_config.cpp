@@ -34,11 +34,14 @@ void ProjectConfig::create_project(void) {
 	switch (programming_language_enum) {
 	case ProgrammingLanguage::RUST:
 		execute_command("cargo", {"new", ProjectName});
+        break;
 	case ProgrammingLanguage::GO:
 		execute_command("go", {"mod", "init", ProjectName});
+        break;
 	default:
 		std::filesystem::create_directories(ProjectName);
 		create_main_file = true;
+        break;
 	}
 
 	std::filesystem::current_path(ProjectName);
