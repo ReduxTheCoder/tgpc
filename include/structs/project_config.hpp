@@ -9,7 +9,6 @@ struct ProjectConfig {
     
     ProjectConfig(const std::string& name, const std::string& language)
         : ProjectName(name), ProgrammingLanguageString(language) {}
-    void create_metadata_file(void);
     void create_project(void);
 };
 
