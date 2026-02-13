@@ -1,7 +1,7 @@
 <h1 align="center">
 <img src="assets/tgpc_logo.png" width="600">
 </h1><br>
-TGPC is a C command-line tool to quickly scaffold code projects using templates.
+TGPC is a C++ command-line tool to quickly scaffold code projects using templates.
 
 ## Features
 - Quickly create projects

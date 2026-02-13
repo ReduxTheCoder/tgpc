@@ -38,6 +38,7 @@ int main(int argc, const char **argv) {
 			return static_cast<int>(e.code);
 		}
 		break;
+    }
 	default:
 		break;
 	}
