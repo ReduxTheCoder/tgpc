@@ -10,5 +10,6 @@ TgpcCommand get_enum_command_from_string(int argc, const char **argv) {
 	std::string command = argv[1];
 
     if (command == "new") return TgpcCommand::NEW;
+    if (command == "help") return TgpcCommand::HELP;
     else throw ExitCodeException(ExitCode::UNKNOWN_COMMAND);
 }

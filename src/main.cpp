@@ -1,5 +1,6 @@
 #include "enums/command.hpp"
 #include "enums/exit_code.hpp"
+#include "other.hpp"
 #include "structs/project_config.hpp"
 #include <iostream>
 
@@ -33,11 +34,15 @@ int main(int argc, const char **argv) {
 		try {
 			project_config.create_project();
 		} catch (const ExitCodeException &e) {
-			std::cerr << "Unexpected exception occurred: (error code: "
-			          << static_cast<int>(e.code) << "): " << e.what() << "\n";
+			std::cerr << "[Error] (Error code "
+			          << static_cast<int>(e.code) << ") " << e.what() << "\n";
 			return static_cast<int>(e.code);
 		}
 		break;
+    }
+    case TgpcCommand::HELP: {
+        other::display_help();
+        break;
     }
 	default:
 		break;

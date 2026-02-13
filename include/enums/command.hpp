@@ -3,8 +3,8 @@
 
 enum class TgpcCommand {
 	NEW,
-	/*COMMAND_HELP,
-	COMMAND_RUN,
+	HELP,
+	/*COMMAND_RUN,
 	COMMAND_CONFIG,
 	COMMAND_DATA,
 	COMMAND_UPDATE, */
