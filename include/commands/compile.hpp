@@ -1,6 +1,6 @@
 #ifndef RUN_HPP
 #define RUN_HPP
 
-void run_project(void);
+void compile_project(void);
 
 #endif

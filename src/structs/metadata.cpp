@@ -4,6 +4,7 @@
 #include "version.hpp"
 #include <cstddef>
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <utility>
 
@@ -23,7 +24,7 @@ void Metadata::create_metadata_file(void) {
 
 std::string Metadata::get(Key key) {
 	std::size_t current_line =
-	    1; // Skip the first line as it doesn't contain useful info
+	    0; // Skip the first line as it doesn't contain useful info
 	std::size_t requested_line = std::to_underlying(key);
 
 	// the second line contains the programming language, third creation date,
@@ -37,7 +38,7 @@ std::string Metadata::get(Key key) {
 
 	std::string line;
 	while (std::getline(file, line)) {
-		current_line++;
+        ++current_line;
 
 		if (current_line == requested_line) {
 			return line;

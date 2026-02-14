@@ -52,7 +52,7 @@ int main(int argc, const char **argv) {
     }
     case TgpcCommand::COMPILE: {
         try {
-            run_project();
+            compile_project();
         } catch (const ExitCodeException& e) {
             std::cerr << "[Error] (Error code " << to_underlying(e.code) << ") "
                       << e.what() << "\n";

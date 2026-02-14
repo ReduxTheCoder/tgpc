@@ -9,8 +9,10 @@ void CompileTemplate::populate_template() {
         TemplateArgs = {"main.c", "-o", "app"};
         break;
     case ProgrammingLanguage::CPP:
-        Template = "g++";
-        TemplateArgs = {"main.cpp", "-o", "app"};
+        // Template = "g++";
+        // TemplateArgs = {"main.cpp", "-o", "app"};
+        Template = "make";
+        TemplateArgs = {"install"};
         break;
     case ProgrammingLanguage::RUST:
         Template = "cargo";
