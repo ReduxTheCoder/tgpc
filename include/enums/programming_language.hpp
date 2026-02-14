@@ -9,7 +9,6 @@ enum class ProgrammingLanguage {
 	PYTHON,
 	JAVA,
 	RUST,
-	ASM,
 	JS,
 	TS,
 	RB,

@@ -13,8 +13,6 @@ get_enum_programming_language_from_string(const std::string *string) {
 		return ProgrammingLanguage::JAVA;
 	if (*string == "rs")
 		return ProgrammingLanguage::RUST;
-	if (*string == "asm")
-		return ProgrammingLanguage::ASM;
 	if (*string == "js")
 		return ProgrammingLanguage::JS;
 	if (*string == "ts")
@@ -26,5 +24,6 @@ get_enum_programming_language_from_string(const std::string *string) {
 	if (*string == "php")
 		return ProgrammingLanguage::PHP;
 	else
-		throw ExitCodeException(ExitCode::INCORRECT_PROGRAM_USAGE, "Language not recognized.");
+		throw ExitCodeException(ExitCode::INCORRECT_PROGRAM_USAGE,
+		                        "Language not recognized.");
 }

@@ -1,20 +1,17 @@
 #ifndef USER_TEMPLATE_HPP
 #define USER_TEMPLATE_HPP
 
+#include "classes/template_base.hpp"
 #include "enums/programming_language.hpp"
-#include <string>
 
-class CodeTemplate {
-	ProgrammingLanguage ProgrammingLang;
-	std::string Template;
-
+class CodeTemplate : public TemplateBase {
     public:
 	CodeTemplate(ProgrammingLanguage programming_language)
-	    : ProgrammingLang(programming_language),
-	      Template(get_main_template_from_programming_language()) {}
+	    : TemplateBase(programming_language) {
+            populate_template();
+        }
 
-	std::string get_main_template_from_programming_language() const;
-    const std::string& get_template() const;
+    void populate_template() override;
 };
 
 #endif

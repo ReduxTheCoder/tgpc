@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <fstream>
 #include <string>
+#include <utility>
 
 void Metadata::create_metadata_file(void) {
 	std::ofstream metadata_file(METADATA_FILE_NAME);
@@ -23,7 +24,7 @@ void Metadata::create_metadata_file(void) {
 std::string Metadata::get(Key key) {
 	std::size_t current_line =
 	    1; // Skip the first line as it doesn't contain useful info
-	std::size_t requested_line = static_cast<std::size_t>(key);
+	std::size_t requested_line = std::to_underlying(key);
 
 	// the second line contains the programming language, third creation date,
 	// fourth used program version

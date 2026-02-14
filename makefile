@@ -2,8 +2,8 @@
 SRC := $(shell find src -name "*.cpp")
 INCLUDE := -Iinclude
 
-CFLAGS_DEBUG := -Wall -Wextra -pedantic-errors -g $(INCLUDE)
-CFLAGS_RELEASE := -O3 -flto -DNDEBUG -mtune=generic -march=x86-64 $(INCLUDE)
+CFLAGS_DEBUG := -Wall -Wextra -pedantic-errors -std=c++23 -g $(INCLUDE)
+CFLAGS_RELEASE := -O3 -flto -DNDEBUG -mtune=generic -std=c++23 -march=x86-64 $(INCLUDE)
 
 BIN := bin/tgpc
 BIN_DEBUG := bin/tgpc-debug

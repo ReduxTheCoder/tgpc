@@ -7,6 +7,177 @@
       "-Wall",
       "-Wextra",
       "-pedantic-errors",
+      "-std=c++23",
+      "-g",
+      "-Iinclude",
+      "-o",
+      "bin/tgpc-debug"
+    ],
+    "directory": "/home/San_Genna/Code/C/tgpc",
+    "output": "bin/tgpc-debug"
+  },
+  {
+    "file": "src/structs/metadata.cpp",
+    "arguments": [
+      "g++",
+      "src/structs/metadata.cpp",
+      "-Wall",
+      "-Wextra",
+      "-pedantic-errors",
+      "-std=c++23",
+      "-g",
+      "-Iinclude",
+      "-o",
+      "bin/tgpc-debug"
+    ],
+    "directory": "/home/San_Genna/Code/C/tgpc",
+    "output": "bin/tgpc-debug"
+  },
+  {
+    "file": "src/classes/code_template.cpp",
+    "arguments": [
+      "g++",
+      "src/classes/code_template.cpp",
+      "-Wall",
+      "-Wextra",
+      "-pedantic-errors",
+      "-std=c++23",
+      "-g",
+      "-Iinclude",
+      "-o",
+      "bin/tgpc-debug"
+    ],
+    "directory": "/home/San_Genna/Code/C/tgpc",
+    "output": "bin/tgpc-debug"
+  },
+  {
+    "file": "src/classes/compile_template.cpp",
+    "arguments": [
+      "g++",
+      "src/classes/compile_template.cpp",
+      "-Wall",
+      "-Wextra",
+      "-pedantic-errors",
+      "-std=c++23",
+      "-g",
+      "-Iinclude",
+      "-o",
+      "bin/tgpc-debug"
+    ],
+    "directory": "/home/San_Genna/Code/C/tgpc",
+    "output": "bin/tgpc-debug"
+  },
+  {
+    "file": "src/classes/project_config.cpp",
+    "arguments": [
+      "g++",
+      "src/classes/project_config.cpp",
+      "-Wall",
+      "-Wextra",
+      "-pedantic-errors",
+      "-std=c++23",
+      "-g",
+      "-Iinclude",
+      "-o",
+      "bin/tgpc-debug"
+    ],
+    "directory": "/home/San_Genna/Code/C/tgpc",
+    "output": "bin/tgpc-debug"
+  },
+  {
+    "file": "src/command/compile.cpp",
+    "arguments": [
+      "g++",
+      "src/command/compile.cpp",
+      "-Wall",
+      "-Wextra",
+      "-pedantic-errors",
+      "-std=c++23",
+      "-g",
+      "-Iinclude",
+      "-o",
+      "bin/tgpc-debug"
+    ],
+    "directory": "/home/San_Genna/Code/C/tgpc",
+    "output": "bin/tgpc-debug"
+  },
+  {
+    "file": "src/enums/command.cpp",
+    "arguments": [
+      "g++",
+      "src/enums/command.cpp",
+      "-Wall",
+      "-Wextra",
+      "-pedantic-errors",
+      "-std=c++23",
+      "-g",
+      "-Iinclude",
+      "-o",
+      "bin/tgpc-debug"
+    ],
+    "directory": "/home/San_Genna/Code/C/tgpc",
+    "output": "bin/tgpc-debug"
+  },
+  {
+    "file": "src/enums/programming_language.cpp",
+    "arguments": [
+      "g++",
+      "src/enums/programming_language.cpp",
+      "-Wall",
+      "-Wextra",
+      "-pedantic-errors",
+      "-std=c++23",
+      "-g",
+      "-Iinclude",
+      "-o",
+      "bin/tgpc-debug"
+    ],
+    "directory": "/home/San_Genna/Code/C/tgpc",
+    "output": "bin/tgpc-debug"
+  },
+  {
+    "file": "src/command_executor.cpp",
+    "arguments": [
+      "g++",
+      "src/command_executor.cpp",
+      "-Wall",
+      "-Wextra",
+      "-pedantic-errors",
+      "-std=c++23",
+      "-g",
+      "-Iinclude",
+      "-o",
+      "bin/tgpc-debug"
+    ],
+    "directory": "/home/San_Genna/Code/C/tgpc",
+    "output": "bin/tgpc-debug"
+  },
+  {
+    "file": "src/utils.cpp",
+    "arguments": [
+      "g++",
+      "src/utils.cpp",
+      "-Wall",
+      "-Wextra",
+      "-pedantic-errors",
+      "-std=c++23",
+      "-g",
+      "-Iinclude",
+      "-o",
+      "bin/tgpc-debug"
+    ],
+    "directory": "/home/San_Genna/Code/C/tgpc",
+    "output": "bin/tgpc-debug"
+  },
+  {
+    "file": "src/other.cpp",
+    "arguments": [
+      "g++",
+      "src/other.cpp",
+      "-Wall",
+      "-Wextra",
+      "-pedantic-errors",
+      "-std=c++23",
       "-g",
       "-Iinclude",
       "-o",

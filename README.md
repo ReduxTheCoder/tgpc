@@ -53,7 +53,6 @@ here's a table showing supported languages and their respective name to use:
 | C++        | cpp  |
 | Java       | java |
 | Rust       | rs   |
-| Assembly   | asm  |
 | JavaScript | js   |
 | TypeScript | ts   |
 | Ruby       | rb   |

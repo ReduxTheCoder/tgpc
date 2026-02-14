@@ -4,7 +4,7 @@
 enum class TgpcCommand {
 	NEW,
 	HELP,
-	/*COMMAND_RUN,
+	/*COMMAND_COMPILE,
 	COMMAND_CONFIG,
 	COMMAND_DATA,
 	COMMAND_UPDATE, */

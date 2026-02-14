@@ -11,9 +11,5 @@ void run_project(void) {
 	ProgrammingLanguage programming_language_enum =
 	    get_enum_programming_language_from_string(&programming_language);
 
-    try {
-        CodeTemplate code_template(programming_language_enum);
-    } catch (const ExitCodeException& e) {
-        throw;
-    }
+    
 }

@@ -8,6 +8,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <utility>
 
 void ProjectConfig::create_project(void) {
 	ProgrammingLanguage programming_language_enum =
@@ -55,7 +56,7 @@ void ProjectConfig::create_project(void) {
         metadata.create_metadata_file();
 	} catch (const ExitCodeException &e) {
         std::cerr << "[Error] (Error code "
-                  << static_cast<int>(e.code) << ") " << e.what() << "\n";
+                  << std::to_underlying(e.code) << ") " << e.what() << "\n";
 		throw;
 	}
 

@@ -3,6 +3,9 @@
 #include "other.hpp"
 #include "classes/project_config.hpp"
 #include <iostream>
+#include <utility>
+
+using std::to_underlying;
 
 int main(int argc, const char **argv) {
 	TgpcCommand command;
@@ -10,7 +13,7 @@ int main(int argc, const char **argv) {
 		command = get_enum_command_from_string(argc, argv);
 	} catch (const ExitCodeException &e) {
 		std::cerr << "Incorrect program usage...\n";
-		return static_cast<int>(e.code);
+		return to_underlying(e.code);
 	}
 
 	switch (command) {
@@ -26,7 +29,7 @@ int main(int argc, const char **argv) {
 		}
 
 		if (error) {
-			return static_cast<int>(ExitCode::INCORRECT_PROGRAM_USAGE);
+			return to_underlying(ExitCode::INCORRECT_PROGRAM_USAGE);
 		}
 
 		ProjectConfig project_config(argv[2], argv[3]);
@@ -35,8 +38,8 @@ int main(int argc, const char **argv) {
 			project_config.create_project();
 		} catch (const ExitCodeException &e) {
 			std::cerr << "[Error] (Error code "
-			          << static_cast<int>(e.code) << ") " << e.what() << "\n";
-			return static_cast<int>(e.code);
+			          << to_underlying(e.code) << ") " << e.what() << "\n";
+			return to_underlying(e.code);
 		}
 		break;
     }
