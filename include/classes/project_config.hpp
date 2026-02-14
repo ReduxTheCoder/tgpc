@@ -3,10 +3,11 @@
 
 #include <string>
 
-struct ProjectConfig {
+class ProjectConfig {
     std::string ProjectName;
     std::string ProgrammingLanguageString;
     
+    public:
     ProjectConfig(const std::string& name, const std::string& language)
         : ProjectName(name), ProgrammingLanguageString(language) {}
     void create_project(void);

@@ -1,4 +1,4 @@
-#include "structs/project_config.hpp"
+#include "classes/project_config.hpp"
 #include "structs/metadata.hpp"
 #include "command_executor.hpp"
 #include "enums/exit_code.hpp"

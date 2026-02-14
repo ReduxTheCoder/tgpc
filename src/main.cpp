@@ -1,7 +1,7 @@
 #include "enums/command.hpp"
 #include "enums/exit_code.hpp"
 #include "other.hpp"
-#include "structs/project_config.hpp"
+#include "classes/project_config.hpp"
 #include <iostream>
 
 int main(int argc, const char **argv) {
