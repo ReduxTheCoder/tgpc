@@ -1,12 +1,9 @@
 #include "classes/compile_template.hpp"
 #include "enums/exit_code.hpp"
+#include "enums/programming_language.hpp"
 
 void CompileTemplate::populate_template() {
     switch (ProgrammingLang) {
-    case ProgrammingLanguage::PYTHON:
-        Template = "python";
-        TemplateArgs = {"main.py"};
-        break;
     case ProgrammingLanguage::C:
         Template = "gcc";
         TemplateArgs = {"main.c", "-o", "app"};
@@ -17,30 +14,27 @@ void CompileTemplate::populate_template() {
         break;
     case ProgrammingLanguage::RUST:
         Template = "cargo";
-        TemplateArgs = {"run"};
+        TemplateArgs = {"build"};
         break;
     case ProgrammingLanguage::JAVA:
         Template = "javac";
         TemplateArgs = {"Main"};
         break;
-    case ProgrammingLanguage::JS:
-        Template = "console.log(\"Hello, World!\");";
-        break;
     case ProgrammingLanguage::TS:
-        Template = "console.log(\"Hello, World!\");";
-        break;
-    case ProgrammingLanguage::RB:
-        Template = "puts \"Hello, World!\"";
+        Template = "tsc";
+        TemplateArgs = {"program.ts"};
         break;
     case ProgrammingLanguage::GO:
-        Template = "package main\nimport \"fmt\"\nfunc main() "
-                   "{\n\tfmt.Println(\"Hello, World!\")\n}";
+        Template = "go";
+        TemplateArgs = {"build", "-o", "program", "program.go"};
         break;
-    case ProgrammingLanguage::PHP:
-        Template = "<?php\n echo \"Hello, World!\\n\";\n?>";
-        break;
-    default:
+    case ProgrammingLanguage::UNKNOWN:
         throw ExitCodeException(ExitCode::INCORRECT_PROGRAM_USAGE,
                                 "Unknown programming language.");
+    default:
+        throw ExitCodeException(
+            ExitCode::INCOMPILABLE_PROGRAMMING_LANGUAGE,
+            "This programming language is interpeted, could'nt compile");
+        break;
     }
 }

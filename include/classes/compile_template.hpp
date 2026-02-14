@@ -3,6 +3,7 @@
 
 #include "classes/template_base.hpp"
 #include "enums/programming_language.hpp"
+#include <string>
 #include <vector>
 
 class CompileTemplate : public TemplateBase {
@@ -15,6 +16,7 @@ class CompileTemplate : public TemplateBase {
         populate_template();
     }
 
+    const std::vector<std::string>& get_template_argument() const { return TemplateArgs; };
     void populate_template() override;
 };
 

@@ -11,5 +11,6 @@ TgpcCommand get_enum_command_from_string(int argc, const char **argv) {
 
     if (command == "new") return TgpcCommand::NEW;
     if (command == "help") return TgpcCommand::HELP;
+    if (command == "compile") return TgpcCommand::COMPILE;
     else throw ExitCodeException(ExitCode::UNKNOWN_COMMAND);
 }
