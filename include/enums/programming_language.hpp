@@ -4,20 +4,21 @@
 #include <string>
 
 enum class ProgrammingLanguage {
-    C,
-    CPP,
-    PYTHON,
-    JAVA,
-    RUST,
-    ASM,
-    JS,
-    TS,
-    RB,
-    GO,
-    PHP,
-    UNKNOWN,
+	C,
+	CPP,
+	PYTHON,
+	JAVA,
+	RUST,
+	ASM,
+	JS,
+	TS,
+	RB,
+	GO,
+	PHP,
+	UNKNOWN,
 };
 
-ProgrammingLanguage get_enum_programming_language_from_string(const std::string *string);
+ProgrammingLanguage
+get_enum_programming_language_from_string(const std::string *string);
 
 #endif

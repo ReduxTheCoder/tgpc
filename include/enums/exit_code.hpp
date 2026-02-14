@@ -21,7 +21,7 @@ struct ExitCodeException : public std::exception {
     ExitCodeException(ExitCode c, std::string msg = "") : code(c), message(std::move(msg)) {}
 
     const char *what() const noexcept override {
-        return message.empty() ? "ExitCodeException occurred" : message.c_str();
+        return message.empty() ? "An error occurred." : message.c_str();
     }
 };
 

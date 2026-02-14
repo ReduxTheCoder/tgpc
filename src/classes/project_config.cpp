@@ -1,4 +1,5 @@
 #include "classes/project_config.hpp"
+#include "classes/code_template.hpp"
 #include "structs/metadata.hpp"
 #include "command_executor.hpp"
 #include "enums/exit_code.hpp"
@@ -66,6 +67,11 @@ void ProjectConfig::create_project(void) {
 			                        "Failed to create main file.");
 		}
 
-		main_file << "Templates not implemented...\n";
+        try {
+            CodeTemplate code_template(programming_language_enum);
+            main_file << code_template.get_template() << '\n';
+        } catch (const ExitCodeException& e) {
+            throw e;
+        }
 	}
 }
