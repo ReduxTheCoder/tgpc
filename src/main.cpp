@@ -6,8 +6,6 @@
 #include <iostream>
 #include <utility>
 
-// TODO: check if the compile command works, and fix it
-
 using std::to_underlying;
 
 int main(int argc, const char **argv) {

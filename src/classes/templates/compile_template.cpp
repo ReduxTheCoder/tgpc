@@ -1,4 +1,4 @@
-#include "classes/compile_template.hpp"
+#include "classes/templates/compile_template.hpp"
 #include "enums/exit_code.hpp"
 #include "enums/programming_language.hpp"
 

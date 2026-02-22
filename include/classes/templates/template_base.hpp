@@ -2,6 +2,7 @@
 #define TEMPLATE_BASE_HPP
 
 #include "enums/programming_language.hpp"
+
 class TemplateBase {
     protected:
         ProgrammingLanguage ProgrammingLang;

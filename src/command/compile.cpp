@@ -19,7 +19,8 @@
 //     std::cout << "Compiled!";
 // }
 
-#include "classes/compile_template.hpp"
+#include "classes/configs/config_compile.hpp"
+#include "classes/templates/compile_template.hpp"
 #include "command_executor.hpp"
 #include "commands/compile.hpp"
 #include "enums/programming_language.hpp"
@@ -32,6 +33,9 @@
 void compile_project() {
     std::string programming_language =
         Metadata::get(Metadata::Key::PROGRAMMING_LANGUAGE);
+
+    ConfigCompile config_compile;
+    config_compile.get_compile_command(programming_language);
 
     ProgrammingLanguage programming_language_enum =
         get_enum_programming_language_from_string(&programming_language);

@@ -1,7 +1,7 @@
 #ifndef COMPILE_TEMPLATE_HPP
 #define COMPILE_TEMPLATE_HPP
 
-#include "classes/template_base.hpp"
+#include "classes/templates/template_base.hpp"
 #include "enums/programming_language.hpp"
 #include <string>
 #include <vector>

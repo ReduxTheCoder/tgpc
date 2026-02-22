@@ -1,9 +1,11 @@
 #include "classes/project_config.hpp"
-#include "classes/code_template.hpp"
-#include "structs/metadata.hpp"
+#include "classes/configs/config_base.hpp"
+#include "classes/configs/config_compile.hpp"
+#include "classes/templates/code_template.hpp"
 #include "command_executor.hpp"
 #include "enums/exit_code.hpp"
 #include "enums/programming_language.hpp"
+#include "structs/metadata.hpp"
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -11,68 +13,77 @@
 #include <utility>
 
 void ProjectConfig::create_project(void) {
-	ProgrammingLanguage programming_language_enum =
-	    get_enum_programming_language_from_string(&ProgrammingLanguageString);
+    ProgrammingLanguage programming_language_enum =
+        get_enum_programming_language_from_string(&ProgrammingLanguageString);
 
-	namespace fs = std::filesystem;
-	if (fs::exists(ProjectName)) {
-		std::string item_type, command;
+    namespace fs = std::filesystem;
+    if (fs::exists(ProjectName)) {
+        std::string item_type, command;
 
-		if (fs::is_directory(ProjectName)) {
-			item_type = "directory";
-			command = "rm -r";
-		} else {
-			item_type = "file";
-			command = "rm";
-		}
+        if (fs::is_directory(ProjectName)) {
+            item_type = "directory";
+            command = "rm -r";
+        } else {
+            item_type = "file";
+            command = "rm";
+        }
 
-		std::string error =
-		    item_type +
-		    " named like the project already exists.\nTry running `" + command +
-		    " " + ProjectName + "`\n";
-		throw ExitCodeException(ExitCode::ITEM_EXISTS, error);
-	}
+        std::string error =
+            item_type +
+            " named like the project already exists.\nTry running `" + command +
+            " " + ProjectName + "`\n";
+        throw ExitCodeException(ExitCode::ITEM_EXISTS, error);
+    }
 
-	bool create_main_file = false;
+    bool create_main_file = false;
 
-	switch (programming_language_enum) {
-	case ProgrammingLanguage::RUST:
-		execute_command("cargo", {"new", ProjectName});
-		break;
-	case ProgrammingLanguage::GO:
-		execute_command("go", {"mod", "init", ProjectName});
-		break;
-	default:
-		std::filesystem::create_directories(ProjectName);
-		create_main_file = true;
-		break;
-	}
+    switch (programming_language_enum) {
+    case ProgrammingLanguage::RUST:
+        execute_command("cargo", {"new", ProjectName});
+        break;
+    case ProgrammingLanguage::GO:
+        execute_command("go", {"mod", "init", ProjectName});
+        break;
+    default:
+        std::filesystem::create_directories(ProjectName);
+        create_main_file = true;
+        break;
+    }
 
-	std::filesystem::current_path(ProjectName);
+    std::filesystem::current_path(ProjectName);
 
-    Metadata metadata(ProgrammingLanguageString);
-
-	try {
-        metadata.create_metadata_file();
-	} catch (const ExitCodeException &e) {
-        std::cerr << "[Error] (Error code "
-                  << std::to_underlying(e.code) << ") " << e.what() << "\n";
-		throw;
-	}
-
-	if (create_main_file) {
-		std::string main_file_name = "main." + ProgrammingLanguageString;
-		std::ofstream main_file(main_file_name);
-		if (!main_file.is_open()) {
-			throw ExitCodeException(ExitCode::INTERNAL_PROGRAM_ERROR,
-			                        "Failed to create main file.");
-		}
+    if (create_main_file) {
+        std::string main_file_name = "main." + ProgrammingLanguageString;
+        std::ofstream main_file(main_file_name);
+        if (!main_file.is_open()) {
+            throw ExitCodeException(ExitCode::INTERNAL_PROGRAM_ERROR,
+                                    "Failed to create main file.");
+        }
 
         try {
             CodeTemplate code_template(programming_language_enum);
             main_file << code_template.get_template() << '\n';
-        } catch (const ExitCodeException& e) {
+        } catch (const ExitCodeException &e) {
             throw e;
         }
-	}
+    }
+
+    {
+        Config config;
+        config.create();
+    }
+
+    std::filesystem::current_path(".tgpc");
+
+    Metadata metadata(ProgrammingLanguageString);
+
+    try {
+        metadata.create_metadata_file();
+    } catch (const ExitCodeException &e) {
+        std::cerr << "[Error] (Error code " << std::to_underlying(e.code)
+                  << ") " << e.what() << "\n";
+    }
+
+    ConfigCompile config_compile;
+    config_compile.create();
 }

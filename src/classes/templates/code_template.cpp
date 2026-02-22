@@ -1,4 +1,4 @@
-#include "classes/code_template.hpp"
+#include "classes/templates/code_template.hpp"
 #include "enums/exit_code.hpp"
 
 void CodeTemplate::populate_template() {

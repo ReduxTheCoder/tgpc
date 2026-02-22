@@ -4,12 +4,11 @@
 #include "version.hpp"
 #include <cstddef>
 #include <fstream>
-#include <iostream>
 #include <string>
 #include <utility>
 
 void Metadata::create_metadata_file(void) {
-	std::ofstream metadata_file(METADATA_FILE_NAME);
+	std::ofstream metadata_file("metadata.tgpc");
 	if (!metadata_file.is_open()) {
 		throw ExitCodeException(ExitCode::INTERNAL_PROGRAM_ERROR,
 		                        "Failed to create metadata file");
@@ -30,7 +29,7 @@ std::string Metadata::get(Key key) {
 	// the second line contains the programming language, third creation date,
 	// fourth used program version
 
-	std::ifstream file(METADATA_FILE_NAME);
+	std::ifstream file(".tgpc/metadata.tgpc");
 	if (!file.is_open()) {
 		throw ExitCodeException(ExitCode::METADATA_NOT_FOUND,
 		                        "Metadata file not found");

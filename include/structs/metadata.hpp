@@ -3,8 +3,6 @@
 
 #include <string>
 
-#define METADATA_FILE_NAME ".tgpc_meta"
-
 struct Metadata {
     enum class Key {
         PROGRAMMING_LANGUAGE = 2,
